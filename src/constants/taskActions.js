@@ -1,0 +1,7 @@
+const TASK_ACTION_TYPES = {
+  ADD_TASK: "ADD_TASK",
+  REMOVE_TASK: "REMOVE_TASK",
+  EDIT_TASK: "EDIT_TASK",
+};
+
+export default TASK_ACTION_TYPES;

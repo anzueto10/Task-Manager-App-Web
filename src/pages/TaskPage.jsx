@@ -11,7 +11,7 @@ const TaskPage = () => {
 
   return (
     <TaskProvider>
-      <div className="min-w-screen min-h-screen flex lg:flex-row flex-col bg-taskBoardContainer lg:p-5 font-openSans">
+      <div className="min-w-screen min-h-screen flex xl:flex-row flex-col bg-taskBoardContainer xl:p-5 font-openSans">
         <AsideBoard />
 
         <TaskBoard />

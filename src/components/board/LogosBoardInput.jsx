@@ -4,7 +4,7 @@ import LogoBoardInput from "./LogoBoardInput";
 
 const LogosBoardInput = ({ logos, selectLogo }) => {
   return (
-    <div className="flex flex-wrap justify-between">
+    <div className="flex flex-wrap justify-between gap-4">
       {logos.map((logo, index) => (
         <LogoBoardInput
           logo={logo.logo}

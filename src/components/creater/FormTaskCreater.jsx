@@ -40,7 +40,7 @@ const FormTaskCreater = () => {
 
   return (
     <form
-      className="w-full flex flex-col gap-6"
+      className="w-full flex flex-col gap-6 flex-grow justify-center"
       onSubmit={handleSubmit}
       id="creater"
     >
@@ -52,7 +52,7 @@ const FormTaskCreater = () => {
           name="taskName"
           id="taskNameField"
           placeholder="Create a web..."
-          className="w-full border-createrInput border-solid border-2 rounded-md text-white p-3 bg-transparent text-base"
+          className="w-full border-createrInput border-solid border-2 rounded-md text-white p-3 bg-transparent text-base flex"
         />
       </label>
       {/*<label className="w-full flex flex-col gap-5">

@@ -55,7 +55,7 @@ const FormBoardCreter = () => {
       id="creater"
     >
       <label className="w-full flex flex-col gap-3 ">
-        <span className="text-createrLabel font-bold text-lg lg:text-sm">
+        <span className="text-createrLabel font-bold text-lg xl:text-sm">
           Board Name
         </span>
         <input

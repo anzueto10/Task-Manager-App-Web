@@ -45,7 +45,7 @@ const TaskOptionsCard = ({ task, handleCancel }) => {
     handleCancel();
   };
   return (
-    <div className="flex bg-gradient-to-b from-containerCreatersBlue to-containerCreatersRed lg:right-10 lg:bottom-10 fixed p-3 rounded-xl lg:w-3/12 w-full z-30 top-16 left-0">
+    <div className="flex bg-gradient-to-b from-containerCreatersBlue to-containerCreatersRed xl:right-10 xl:bottom-10 fixed p-3 rounded-xl xl:w-3/12 w-full z-30 top-16 left-0">
       <div className="rounded-lg bg-taskCreater px-7 py-4 w-full h-full">
         <header className="flex flex-row justify-between w-full mb-5">
           <h1 className="text-white text-lg">Edit Task Name</h1>
@@ -112,10 +112,10 @@ const TaskOptionsCard = ({ task, handleCancel }) => {
             <span className="text-createrLabel font-bold text-sm">Tags</span>
             <TagInput tagsDefault={tags} />
           </label>
-          <div className="flex flex-row gap-5 justify-start w-full">
+          <div className="flex xl:flex-row flex-col gap-5 justify-start w-full">
             <button
               type="submit"
-              className="bg-blue-700 text-white px-4 py-1.5 text-sm rounded-2xl flex flex-row items-center justify-around w-3/12"
+              className="bg-blue-700 w-full text-white px-4 py-1.5 text-sm rounded-2xl flex flex-row items-center gap-5 justify-center xl:w-3/12"
             >
               Save
               <CheckIcon fontSize="small" className="inline-block" />

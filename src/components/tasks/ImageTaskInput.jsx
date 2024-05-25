@@ -17,7 +17,7 @@ const ImageTaskInput = ({ defaultImage }) => {
     <label
       htmlFor="dropzone-file"
       ref={labelBackground}
-      className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 min-h-28 hover:opacity-70"
+      className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 xl:min-h-28 hover:opacity-70"
       style={{
         backgroundPosition: "center center",
         backgroundSize: "100%",

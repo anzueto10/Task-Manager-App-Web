@@ -13,7 +13,7 @@ const AsideBoard = () => {
 
   const showAsideClass = showAside ? "left-0" : "-left-full";
 
-  const smlg = useMediaQuery({ query: "(max-width: 768px)" });
+  const smlg = useMediaQuery({ query: "(max-width: 1279px)" });
 
   const handleClick = () => setShowAside(!showAside);
 
@@ -33,7 +33,7 @@ const AsideBoard = () => {
         <>
           <aside className="z-20">
             <div
-              className={`h-full bg-gray-900 fixed lg:w-1/5 flex flex-col pt-3 px-5 transition-all ease-out ${showAsideClass}`}
+              className={`h-full bg-gray-900 fixed xl:w-1/5 flex flex-col pt-3 px-5 transition-all ease-out ${showAsideClass}`}
             >
               <ToggleNavBarButton
                 onClick={handleClick}

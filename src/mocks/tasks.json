@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "Make a web",
+    "description": "Using js, html, css, using react and using on its a microframework called next js and for the styles uses tailwind css that is a css framework, finally uses vercel to deploy the app en publish it",
+    "image": "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2023/07/computer-coding.jpg",
+    "status": "backlog",
+    "tags": ["Html", "full-stack", "Next js", "Web"],
+    "project": 1
+  }
+]

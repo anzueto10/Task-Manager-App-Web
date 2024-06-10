@@ -17,6 +17,7 @@ const config: Config = {
       backgroundColor: {
         darkTheme: "#191b1f",
         darkThemeTasksLayout: "#292d32",
+        tag: "#c4dbfa",
       },
     },
   },

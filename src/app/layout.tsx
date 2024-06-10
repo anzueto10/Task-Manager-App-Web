@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html>
-      <body className={`${poppins.className} flex flex-col`}>{children}</body>
+      <body className={`${inter.className} h-dvh w-screen`}>{children}</body>
     </html>
   );
 };

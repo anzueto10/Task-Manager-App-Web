@@ -1,9 +1,8 @@
-import getTaskFormData from "@/services/tasks/getTaskFormData";
-import { type FormTaskFields, type ModalType } from "@/types";
+import { type FormProjectFields, type ModalsProps } from "@/types";
+import getProjectFormData from "@/services/projects/getProjectFormData";
 import ModalPortal from "@/components/modals/ModalPortal";
-import { MODALS_TITLES, TASK_FIELDS_TEXTS } from "@/consts";
 
-const TaskModal: ModalType<FormTaskFields> = ({
+const ProjectModal: React.FC<ModalsProps<FormProjectFields>> = ({
   isOpen,
   onClose,
   onSave,
@@ -12,7 +11,7 @@ const TaskModal: ModalType<FormTaskFields> = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    const data = getTaskFormData({ form });
+    const data = getProjectFormData({ form });
     onSave(data);
     onClose();
   };
@@ -37,7 +36,7 @@ const TaskModal: ModalType<FormTaskFields> = ({
             {/*<!-- Modal header -->*/}
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {MODALS_TITLES.TASK}
+                Create New Product
               </h3>
               <button
                 type="button"
@@ -71,7 +70,7 @@ const TaskModal: ModalType<FormTaskFields> = ({
                     htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    {TASK_FIELDS_TEXTS.TITLE}
+                    Name
                   </label>
                   <input
                     type="text"
@@ -82,7 +81,22 @@ const TaskModal: ModalType<FormTaskFields> = ({
                     required={true}
                   />
                 </div>
-
+                <div className="col-span-2 sm:col-span-1">
+                  <label
+                    htmlFor="price"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Price
+                  </label>
+                  <input
+                    type="number"
+                    name="price"
+                    id="price"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="$2999"
+                    required={true}
+                  />
+                </div>
                 <div className="col-span-2 sm:col-span-1">
                   <label
                     htmlFor="category"
@@ -142,4 +156,4 @@ const TaskModal: ModalType<FormTaskFields> = ({
   );
 };
 
-export default TaskModal;
+export default ProjectModal;

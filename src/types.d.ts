@@ -6,6 +6,13 @@ export type Status = (typeof STATUS_TEXTS)[keyof typeof STATUS_TEXTS];
 export type StatusTextClient =
   (typeof STATUS_TEXTS_CLIENT)[keyof typeof STATUS_TEXTS_CLIENT];
 
+export interface User {
+  id: number;
+  name: string;
+  userName: string;
+  email: string;
+}
+
 export interface Task {
   id: number;
   title: string;

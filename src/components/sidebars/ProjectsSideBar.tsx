@@ -1,9 +1,9 @@
 import { ADD_BUTTONS_TEXT, APP_TITLE } from "@/consts";
-import ProjectModal from "@/components/modals/ProjectModal";
 import saveProject from "@/services/projects/saveProject";
 import ModalButton from "@/components/modals/ModalButton";
 import ProjectsContainerCard from "@/components/projects/ProjectsContainerCard";
 import projects from "@/mocks/projects.json";
+import useModalsStore from "@/store/modals";
 
 interface Props {
   isShow: boolean;
@@ -15,7 +15,7 @@ const ProjectsSideBar: React.FC<Props> = ({ isShow, ocult }) => {
     <>
       <aside
         id="drawer-navigation"
-        className={`fixed 2xl:static top-0 left-0 z-40 w-64 h-screen 2xl:h-auto 2xl:w-[80rem] p-4 overflow-y-auto transition-transform  bg-white dark:bg-gray-800 flex flex-col ${
+        className={`fixed 2xl:static top-0 left-0 z-40 w-64 h-screen 2xl:h-auto 2xl:w-2/12 p-4 overflow-y-auto transition-transform  bg-white dark:bg-gray-800 flex flex-col ${
           isShow ? "-translate-x-0" : "-translate-x-full 2xl:hidden"
         }`}
         tabIndex={-1}
@@ -54,8 +54,8 @@ const ProjectsSideBar: React.FC<Props> = ({ isShow, ocult }) => {
           <ProjectsContainerCard projects={projects} />
         </div>
         <ModalButton
+          handleOpen={useModalsStore((state) => state.openProjectModal)}
           onSave={saveProject}
-          Modal={ProjectModal}
           text={ADD_BUTTONS_TEXT.PROJECT}
         />
       </aside>

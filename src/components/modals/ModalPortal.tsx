@@ -1,29 +1,9 @@
-"use client";
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
-
-interface PortalProps {
+interface Props {
   children: React.ReactNode;
 }
 
-const Portal: React.FC<PortalProps> = ({ children }) => {
-  const portalContainerRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const portalContainer = document.createElement("div");
-    document.body.appendChild(portalContainer);
-    portalContainerRef.current = portalContainer;
-
-    return () => {
-      if (portalContainerRef.current) {
-        document.body.removeChild(portalContainerRef.current);
-      }
-    };
-  }, []);
-
-  return portalContainerRef.current
-    ? ReactDOM.createPortal(children, portalContainerRef.current)
-    : null;
+const ModalPortal: React.FC<Props> = ({ children }) => {
+  return <div className="modal-root">{children}</div>;
 };
 
-export default Portal;
+export default ModalPortal;

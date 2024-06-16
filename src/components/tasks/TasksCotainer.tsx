@@ -26,22 +26,22 @@ const TasksCotainerCard: React.FC<Props> = ({ tasks }) => {
     <section className="flex flex-col xl:flex-row gap-5">
       <TasksStatusContainer
         tasks={backlogTasks}
-        status={STATUS_TEXTS_CLIENT.BACK_LOG as StatusTextClient}
+        status={STATUS_TEXTS.BACK_LOG.text}
         color="bg-blue-700"
       />
       <TasksStatusContainer
         tasks={inProgressTasks}
-        status={STATUS_TEXTS_CLIENT.IN_PROGRESS as StatusTextClient}
+        status={STATUS_TEXTS.IN_PROGRESS.text}
         color="bg-yellow-500"
       />
       <TasksStatusContainer
         tasks={inReviewTasks}
-        status={STATUS_TEXTS_CLIENT.IN_REVIEW as StatusTextClient}
+        status={STATUS_TEXTS.IN_REVIEW.text}
         color="bg-purple-800"
       />
       <TasksStatusContainer
         tasks={completedTasks}
-        status={STATUS_TEXTS_CLIENT.COMPLETED as StatusTextClient}
+        status={STATUS_TEXTS.COMPLETED.text}
         color="bg-green-500"
       />
     </section>

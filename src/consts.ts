@@ -7,12 +7,13 @@ export const TASK_FIELDS = {
   IMAGE: "image",
 } as const;
 
-export const TASK_FIELDS_TEXTS = {
+export const PROJECT_FIELDS_TEXT = {
   TITLE: "Title",
   DESCRIPTION: "Description",
-  TAGS: "Tags",
-  IMAGE: "Image",
-} as const;
+  TITLE_HOLDER: "My new project..",
+  DESCRIPTION_HOLDER: "Using task manager app...",
+  BUTTON: "Create a new Project",
+};
 
 export const PROJECT_FIELDS = {
   TITLE: "title",
@@ -20,17 +21,28 @@ export const PROJECT_FIELDS = {
 } as const;
 
 export const STATUS_TEXTS = {
-  BACK_LOG: "backlog",
-  IN_PROGRESS: "in_progress",
-  IN_REVIEW: "in_review",
-  COMPLETED: "completed",
+  BACK_LOG: { value: "backlog", text: "Backlog" },
+  IN_PROGRESS: { value: "in_progress", text: "In Progress" },
+  IN_REVIEW: { value: "in_review", text: "In Review" },
+  COMPLETED: { value: "completed", text: "Completed" },
 } as const;
 
 export const STATUS_TEXTS_CLIENT = {
   BACK_LOG: "Backlog",
   IN_PROGRESS: "In Progress",
-  IN_REVIEW: "In Rreview",
+  IN_REVIEW: "In Review",
   COMPLETED: "Completed",
+} as const;
+
+export const TASK_FIELDS_TEXTS = {
+  TITLE: "Title",
+  DESCRIPTION: "Description",
+  TAGS: "Tags",
+  IMAGE: "Image",
+  STATUS: "Status",
+  TITLE_HOLDER: "My new task...",
+  DESCRIPTION_HOLDER: "Using Task Manager app...",
+  BUTTON: "Create a new Task",
 } as const;
 
 export const APP_TITLE = "Task Manager App" as const;

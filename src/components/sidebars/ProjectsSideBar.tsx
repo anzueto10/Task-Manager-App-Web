@@ -2,15 +2,16 @@ import { ADD_BUTTONS_TEXT, APP_TITLE } from "@/consts";
 import saveProject from "@/services/projects/saveProject";
 import ModalButton from "@/components/modals/ModalButton";
 import ProjectsContainerCard from "@/components/projects/ProjectsContainerCard";
-import projects from "@/mocks/projects.json";
 import useModalsStore from "@/store/modals";
+import { Project } from "@/types";
 
 interface Props {
   isShow: boolean;
   ocult: () => void;
+  projects: Array<Project>;
 }
 
-const ProjectsSideBar: React.FC<Props> = ({ isShow, ocult }) => {
+const ProjectsSideBar: React.FC<Props> = ({ isShow, ocult, projects }) => {
   return (
     <>
       <aside

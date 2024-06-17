@@ -1,10 +1,10 @@
-import { type FormProjectFields, type ModalsProps } from "@/types";
 import getProjectFormData from "@/services/projects/getProjectFormData";
 import useModalsStore from "@/store/modals";
 import { ADD_BUTTONS_TEXT, PROJECT_FIELDS_TEXT } from "@/consts";
+import useProjectsStore from "@/store/projects";
 
 const ProjectModal: React.FC = () => {
-  const onSave = (data: any) => {};
+  const onSave = useProjectsStore((state) => state.addProject);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;

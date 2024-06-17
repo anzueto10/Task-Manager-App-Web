@@ -1,10 +1,11 @@
-import { type Project } from "@/types";
+import saveProject from "@/services/projects/saveProject";
+import { FormProjectFields, type Project } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface State {
   projects: Array<Project>;
-  addProject: (project: Project) => void;
+  addProject: (project: FormProjectFields) => void;
   removeProject: (projectId: Project["id"]) => void;
   editProject: (projectData: Project) => void;
 }
@@ -13,7 +14,8 @@ const useProjectsStore = create<State>()(
   persist(
     (set, get) => ({
       projects: [],
-      addProject: (project) => {
+      addProject: async (projectData) => {
+        const project: Project = await saveProject(projectData);
         set((state) => ({
           projects: [...state.projects, project],
         }));

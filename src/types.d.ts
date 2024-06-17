@@ -11,6 +11,15 @@ export interface User {
   name: string;
   userName: string;
   email: string;
+  updatedAt: Date;
+  createdAt: Date;
+}
+
+export interface FormUserFields {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
 }
 
 export interface Task {
@@ -27,15 +36,21 @@ export interface FormTaskFields {
   title: string;
   description: string;
   status: Status;
-  tags: Array<string>;
-  project: number;
-  image: File;
+  tags: Array<TaskTag>;
+  image: Buffer;
+}
+
+export interface TaskTag {
+  id: number;
+  name: string;
+  task: number;
 }
 
 export interface Project {
   id: number;
   title: string;
   description: string;
+  ownerId: number;
 }
 
 export interface FormProjectFields {

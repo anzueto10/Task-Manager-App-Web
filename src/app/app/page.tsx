@@ -1,4 +1,3 @@
-"use client";
 import ProjectsLayout from "@/components/layouts/ProjectsLayout";
 import TaskLayouts from "@/components/layouts/TasksLayout";
 import ModalPortal from "@/components/modals/ModalPortal";
@@ -9,13 +8,11 @@ import { useState } from "react";
 
 const TaskAppPage: React.FC = () => {
   //TODO Terminar el side bar que tentga un tamaño fijo
-  const [isShow, setIsShow] = useState<boolean>(false);
+  const [isShow, setIsShow] = useState<boolean>(true);
 
   const handleOcult = () => setIsShow(false);
 
-  const handleShow = () => {
-    setIsShow(!isShow);
-  };
+  const handleShow = () => setIsShow(!isShow);
 
   return (
     <>

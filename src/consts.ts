@@ -1,3 +1,7 @@
+import AppleIcon from "@/components/icons/AppleIcon";
+import FacebookIcon from "@/components/icons/FacebookIcon";
+import GoogleIcon from "@/components/icons/GoogleIcon";
+
 export const TASK_FIELDS = {
   TITLE: "title",
   DESCRIPTION: "description",
@@ -63,3 +67,30 @@ export const MODALS_TITLES = {
   TASK: "Create a New Task",
   PROJECT: "Create a New Project",
 } as const;
+
+export const FORM_SIGNUP_EXTERNAL_LINKS = {
+  GOOGLE: { text: "Sign Up with Google", Icon: GoogleIcon, href: "google" },
+  FACEBOOK: { text: "Sign Up with Facebook", Icon: FacebookIcon, href: "fb" },
+  APPLE: { text: "Sign Up with Apple", Icon: AppleIcon, href: "apple" },
+};
+
+export const SIGN_UP_FORM_FIELDS = {
+  USERNAME: {
+    text: "Your Username",
+    value: "username",
+    placeholder: "example10",
+    required: true,
+  },
+  EMAIL: {
+    text: "Your email",
+    value: "email",
+    placeholder: "name@example.com",
+    required: true,
+  },
+  PASSWORD: {
+    text: "Password",
+    value: "password",
+    placeholder: "••••••••",
+    required: true,
+  },
+};

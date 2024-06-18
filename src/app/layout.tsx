@@ -15,7 +15,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html className="dark">
       <body
-        className={`${inter.className} h-dvh w-screen bg-gray-50 dark:bg-gray-900`}
+        className={`${inter.className} h-dvh w-screen bg-blue-50 dark:bg-gray-900`}
       >
         {children}
       </body>

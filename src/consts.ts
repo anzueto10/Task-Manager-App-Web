@@ -1,6 +1,12 @@
-import AppleIcon from "@/components/icons/AppleIcon";
-import FacebookIcon from "@/components/icons/FacebookIcon";
-import GoogleIcon from "@/components/icons/GoogleIcon";
+import AppleIcon from "@/components/ui/icons/AppleIcon";
+import FacebookIcon from "@/components/ui/icons/FacebookIcon";
+import GoogleIcon from "@/components/ui/icons/GoogleIcon";
+
+export const USER_FIELDS = {
+  USERNAME: "username",
+  EMAIL: "email",
+  PASSWORD: "password",
+};
 
 export const TASK_FIELDS = {
   TITLE: "title",
@@ -77,20 +83,26 @@ export const FORM_SIGNUP_EXTERNAL_LINKS = {
 export const SIGN_UP_FORM_FIELDS = {
   USERNAME: {
     text: "Your Username",
-    value: "username",
+    value: USER_FIELDS.USERNAME,
     placeholder: "example10",
     required: true,
   },
   EMAIL: {
     text: "Your email",
-    value: "email",
+    value: USER_FIELDS.EMAIL,
     placeholder: "name@example.com",
     required: true,
   },
   PASSWORD: {
     text: "Password",
-    value: "password",
+    value: USER_FIELDS.PASSWORD,
     placeholder: "••••••••",
     required: true,
   },
+};
+
+export const ERROR_NAMES = {
+  INVALID_TITLE: "InvalidTitleError",
+  INVALID_DESCRIPTION: "InvalidDescription",
+  RESPONSE_ERROR: "ResponseError",
 };

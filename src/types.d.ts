@@ -16,8 +16,7 @@ export interface User {
 }
 
 export interface FormUserFields {
-  name: string;
-  username: string;
+  username?: string;
   email: string;
   password: string;
 }
@@ -36,8 +35,9 @@ export interface FormTaskFields {
   title: string;
   description: string;
   status: Status;
-  tags: Array<TaskTag>;
-  image: Buffer;
+  tags: Array<string>;
+  projectId: number;
+  image: File;
 }
 
 export interface TaskTag {

@@ -1,10 +1,11 @@
-import { StatusTextClient, Task } from "@/types";
-import TasksStatusContainer from "./status/TasksStatusContainer";
-import { STATUS_TEXTS, STATUS_TEXTS_CLIENT } from "@/consts";
+import { Task } from "@/types";
+import TasksStatusContainer from "@/components/tasks/status/TasksStatusContainer";
+import { STATUS_TEXTS } from "@/consts";
 
 interface Props {
   tasks: Array<Task>;
 }
+
 const TasksCotainerCard: React.FC<Props> = ({ tasks }) => {
   const backlogTasks: Array<Task> = tasks.filter(
     (task) => task.status === STATUS_TEXTS.BACK_LOG

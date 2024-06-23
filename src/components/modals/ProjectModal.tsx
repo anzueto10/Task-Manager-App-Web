@@ -1,10 +1,9 @@
-import getProjectFormData from "@/services/projects/getProjectFormData";
-import useModalsStore from "@/store/modals";
+"use client";
+import getProjectFormData from "@/utils/projects/getProjectFormData";
 import { ADD_BUTTONS_TEXT, PROJECT_FIELDS_TEXT } from "@/consts";
-import useProjectsStore from "@/store/projects";
 
 const ProjectModal: React.FC = () => {
-  const onSave = useProjectsStore((state) => state.addProject);
+  const onSave = (data: any) => {};
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -13,9 +12,9 @@ const ProjectModal: React.FC = () => {
     onClose();
   };
 
-  const isOpen = useModalsStore((state) => state.projectModal);
+  const isOpen = true;
 
-  const onClose = useModalsStore((state) => state.closeProjectModal);
+  const onClose = () => {};
 
   return (
     <div

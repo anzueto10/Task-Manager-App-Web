@@ -1,3 +1,4 @@
+"use client";
 import { type StatusTextClient, type Task } from "@/types";
 import TaskCard from "@/components/tasks/TaskCard";
 import DropDownStatus from "@/components/tasks/status/DropDownStatus";

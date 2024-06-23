@@ -1,11 +1,11 @@
+"use client";
 import TasksCotainerCard from "@/components/tasks/TasksCotainer";
-import AddTaskButton from "@/components/FABs/AddTaskButton";
-import useTasksStore from "@/store/tasks";
-import useProjectsStore from "@/store/projects";
+import AddTaskButton from "@/components/ui/FABs/AddTaskButton";
+import { Task } from "@/types";
 
 const TasksLayout: React.FC = () => {
-  const tasks = useTasksStore((state) => state.tasks);
-  const projects = useProjectsStore((state) => state.projects);
+  const tasks: Array<Task> = [];
+  const projects = [];
   return (
     <section className="w-full dark:bg-darkThemeTasksLayout rounded-lg p-5 flex-1 2xl:overflow-y-auto">
       {projects.length > 1 ? (

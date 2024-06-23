@@ -1,9 +1,6 @@
-import getTaskFormData from "@/services/tasks/getTaskFormData";
-import { type FormTaskFields, type ModalType } from "@/types";
-import ModalPortal from "@/components/modals/ModalPortal";
+"use client";
+import getTaskFormData from "@/utils/tasks/getTaskFormData";
 import { MODALS_TITLES, STATUS_TEXTS, TASK_FIELDS_TEXTS } from "@/consts";
-import useModalsStore from "@/store/modals";
-import { type MouseEvent } from "react";
 
 const TaskModal: React.FC = () => {
   const onSave = (data: any) => {};
@@ -16,9 +13,9 @@ const TaskModal: React.FC = () => {
     onClose();
   };
 
-  const isOpen = useModalsStore((state) => state.taskModal);
+  const isOpen = true;
 
-  const onClose = useModalsStore((state) => state.closeTaskModal);
+  const onClose = () => {};
 
   return (
     <div

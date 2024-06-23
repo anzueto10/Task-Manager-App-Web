@@ -1,5 +1,5 @@
 import { Task } from "@/types";
-import TagContainer from "./tags/TagContainer";
+import TagContainer from "@/components/tasks/tags/TagContainer";
 
 interface Props {
   task: Task;

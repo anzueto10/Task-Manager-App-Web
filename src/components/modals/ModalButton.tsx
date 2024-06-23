@@ -1,4 +1,3 @@
-import useModalButton from "@/hooks/useModalButton";
 import { type IconType, type IconSize, type ModalType } from "@/types";
 
 interface Props<T> {

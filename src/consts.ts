@@ -76,7 +76,11 @@ export const MODALS_TITLES = {
 
 export const FORM_SIGNUP_EXTERNAL_LINKS = {
   GOOGLE: { text: "Sign Up with Google", Icon: GoogleIcon, href: "google" },
-  FACEBOOK: { text: "Sign Up with Facebook", Icon: FacebookIcon, href: "fb" },
+  FACEBOOK: {
+    text: "Sign Up with Facebook",
+    Icon: FacebookIcon,
+    href: "facebook",
+  },
   APPLE: { text: "Sign Up with Apple", Icon: AppleIcon, href: "apple" },
 };
 

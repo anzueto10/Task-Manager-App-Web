@@ -76,3 +76,5 @@ export type IconSize = (typeof ICON_SIZES)[keyof typeof ICON_SIZES];
 export type IconType = React.ComponentType<SvgIconProps>;
 
 export type ModalType<T> = React.FC<ModalsProps<T>>;
+
+export type Providers = "google" | "facebook" | "apple";

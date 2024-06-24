@@ -1,8 +1,9 @@
 import { APP_TITLE } from "@/consts";
+import Link from "next/link";
 
 const LoginFormTitle: React.FC = () => {
   return (
-    <a
+    <Link
       href="#"
       className="flex items-center mb-6 text-2xl w-full justify-center font-semibold text-gray-900 dark:text-white"
     >
@@ -12,7 +13,7 @@ const LoginFormTitle: React.FC = () => {
         alt="logo"
       />
       {APP_TITLE}
-    </a>
+    </Link>
   );
 };
 

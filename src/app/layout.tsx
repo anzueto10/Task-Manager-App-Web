@@ -1,6 +1,8 @@
 import { type Metadata } from "next";
 import "./globals.css";
 import { montserrat, roboto, inter, opensans, poppins } from "./fonts";
+import SessionProviderWrapper from "@/components/SessionProviderWrapper";
+import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
   title: "Task Manager App",
@@ -12,16 +14,18 @@ export const metadata: Metadata = {
   icons: "../../public/icons",
 };
 
-const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+const RootLayout = async ({
+  children,
+}: Readonly<{ children: React.ReactNode }>) => {
+  const session = await getServerSession();
   return (
     <html className="dark">
-      <head>
-        <link rel="manifest" href="../../site.webmanifest" />
-      </head>
       <body
         className={`${inter.className} h-dvh w-screen bg-blue-50 dark:bg-gray-900`}
       >
-        {children}
+        <SessionProviderWrapper session={session}>
+          {children}
+        </SessionProviderWrapper>
       </body>
     </html>
   );

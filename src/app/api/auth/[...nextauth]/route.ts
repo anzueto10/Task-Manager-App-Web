@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/libs/prisma";
 import bcrypt from "bcrypt";
@@ -10,9 +10,23 @@ import {
   PrismaClientValidationError,
 } from "@prisma/client/runtime/library";
 import PasswordsDoNotMatchesError from "@/errors/server/login/PasswordsDoNotMatchesError";
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-const authOptions = {
+export const authOptions: AuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: `${profile.given_name} ${profile.family_name}`,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -53,7 +67,7 @@ const authOptions = {
 
           const matchedPassword = await bcrypt.compare(
             credentials.password,
-            userFound.password
+            userFound.password as string
           );
 
           if (!matchedPassword) throw new PasswordsDoNotMatchesError();
@@ -67,10 +81,7 @@ const authOptions = {
           if (
             e instanceof InvalidFieldsUserLogin ||
             e instanceof UserNotFoundError ||
-            e instanceof PasswordsDoNotMatchesError
-          )
-            throw e;
-          else if (
+            e instanceof PasswordsDoNotMatchesError ||
             e instanceof PrismaClientKnownRequestError ||
             e instanceof PrismaClientValidationError ||
             e instanceof PrismaClientInitializationError
@@ -81,6 +92,30 @@ const authOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
+  adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXT_AUTH_SECRET,
+  callbacks: {
+    async signIn({ user, account, email }) {
+      return true;
+    },
+    async jwt({ token, user }) {
+      return {
+        ...token,
+        ...user,
+      };
+    },
+
+    async session({ session, token }) {
+      return session;
+    },
+  },
+
+  session: {
+    strategy: "jwt",
+  },
 };
 
 const handler = NextAuth(authOptions);

@@ -5,11 +5,12 @@ import getUserFormData from "@/utils/user/getUserFormData";
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 const LoginFormBody: React.FC = () => {
   const router = useRouter();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -26,18 +27,20 @@ const LoginFormBody: React.FC = () => {
       });
 
       console.log(res);
+      router.push("/app/");
     } catch (e: unknown) {
       if (e instanceof ResponseError) console.log(e.message);
       else console.log(e);
     }
   };
+
   return (
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
           Log in to your account
         </h1>
-        <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+        <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
           <div className="">
             <label
               htmlFor="email"
@@ -87,12 +90,12 @@ const LoginFormBody: React.FC = () => {
                 Remember me
               </label>
             </div>
-            <a
+            <Link
               href="#"
               className="text-base font-medium text-primary-600 hover:underline dark:text-primary-500"
             >
               Forgot password?
-            </a>
+            </Link>
           </div>
           <button
             type="submit"
@@ -102,12 +105,12 @@ const LoginFormBody: React.FC = () => {
           </button>
           <p className="text-base font-light text-gray-500 dark:text-gray-400">
             Don’t have an account yet?{" "}
-            <a
-              href="#"
+            <Link
+              href="/signup/"
               className="font-medium text-primary-600 hover:underline dark:text-primary-500"
             >
               Sign up
-            </a>
+            </Link>
           </p>
         </form>
       </div>

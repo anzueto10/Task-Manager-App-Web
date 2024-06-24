@@ -1,29 +1,51 @@
 "use client";
 
 import { FORM_SIGNUP_EXTERNAL_LINKS, SIGN_UP_FORM_FIELDS } from "@/consts";
-import ResponseError from "@/errors/ResponseError";
-import { FormEvent } from "react";
+import { FormEvent, MouseEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import getUserFormData from "@/utils/user/getUserFormData";
+import Link from "next/link";
+import { Providers } from "@/types";
 import registerUser from "@/api/user/registerUser";
+import ResponseError from "@/errors/ResponseError";
+import loginUser from "@/api/user/loginUser";
+import { signIn } from "next-auth/react";
 
 const SignupFormBody: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
     const userData = getUserFormData(formData);
     try {
       const newUser = await registerUser(userData);
+      const res = await loginUser(userData);
       console.log(newUser);
-      router.push("/app/");
     } catch (e: unknown) {
       if (e instanceof ResponseError) console.log(e.message);
       else console.log(e);
     }
   };
+
+  const handleExternalSignIn = async (provider: Providers) => {
+    console.log(provider);
+    setLoading(true);
+    try {
+      const response = await signIn(`${provider}`, {
+        callbackUrl: "/",
+        redirect: false,
+      });
+    } catch (e) {
+      console.error(`Error al iniciar sesión con ${provider}`, e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full h-full bg-white rounded-lg shadow dark:border p-6 dark:bg-gray-800 dark:border-gray-700">
       <h1 className="text-xl font-bold mb-5 leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -31,14 +53,14 @@ const SignupFormBody: React.FC = () => {
       </h1>
       <p className="text-sm text-black dark:text-white font-light mb-7">
         Start manage your Projects in seconds. Already have an account?{" "}
-        <a
-          href=""
+        <Link
+          href="/login/"
           className="font-medium text-primary-600 hover:underline dark:text-primary-500"
         >
           Login here
-        </a>
+        </Link>
       </p>
-      <form className="" onSubmit={handleSubmit}>
+      <form className="" onSubmit={handleSignUp}>
         {Object.entries(SIGN_UP_FORM_FIELDS).map(([key, field]) => (
           <div className="mb-5" key={key}>
             <label
@@ -79,12 +101,12 @@ const SignupFormBody: React.FC = () => {
               className="font-light text-gray-500 dark:text-gray-300"
             >
               I accept the{" "}
-              <a
+              <Link
                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 href="#"
               >
                 Terms and Conditions
-              </a>
+              </Link>
             </label>
           </div>
         </div>
@@ -96,12 +118,12 @@ const SignupFormBody: React.FC = () => {
         </button>
         <p className="text-sm text-black dark:text-white font-light w-full text-center">
           Already have an account?{" "}
-          <a
-            href="#"
+          <Link
+            href="/login/"
             className="font-medium text-primary-600 hover:underline dark:text-primary-500"
           >
             Login here
-          </a>
+          </Link>
         </p>
       </form>
       <div className="inline-flex relative items-center justify-center w-full my-5">
@@ -113,14 +135,14 @@ const SignupFormBody: React.FC = () => {
 
       <div className="flex flex-col w-full h-fit">
         {Object.entries(FORM_SIGNUP_EXTERNAL_LINKS).map(([key, link]) => (
-          <a
-            href={link.href}
+          <button
+            onClick={() => handleExternalSignIn(link.href as Providers)}
             key={key}
             className="p-3 flex flex-row justify-center items-center font-medium text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
           >
             <link.Icon h="25" w="25" />
             <span className="ml-3">{link.text}</span>
-          </a>
+          </button>
         ))}
       </div>
     </div>

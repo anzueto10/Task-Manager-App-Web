@@ -71,6 +71,17 @@ export interface ProjectModalsProps extends ModalsProps {
   onSave: (data: FormProjectFields) => void;
 }
 
+export interface LoginInitialValues {
+  emailOrUsername: string;
+  password: string;
+}
+export interface SignupInitialValues {
+  email: string;
+  username: string;
+  password: string;
+  termsAndConditions: boolean;
+}
+
 export type IconSize = (typeof ICON_SIZES)[keyof typeof ICON_SIZES];
 
 export type IconType = React.ComponentType<SvgIconProps>;

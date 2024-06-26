@@ -2,15 +2,16 @@ import NextAuth, { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/libs/prisma";
 import bcrypt from "bcrypt";
-import InvalidFieldsUserLogin from "@/errors/server/login/InvalidFieldsUserLogin";
-import UserNotFoundError from "@/errors/server/login/UserNotFoundError";
+import InvalidFieldsUserLogin from "@/errors/login/InvalidFieldsUserLogin";
+import UserNotFoundError from "@/errors/login/UserNotFoundError";
 import {
   PrismaClientInitializationError,
   PrismaClientKnownRequestError,
   PrismaClientValidationError,
 } from "@prisma/client/runtime/library";
-import PasswordsDoNotMatchesError from "@/errors/server/login/PasswordsDoNotMatchesError";
+import PasswordsDoNotMatchesError from "@/errors/login/PasswordsDoNotMatchesError";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 export const authOptions: AuthOptions = {
@@ -27,18 +28,26 @@ export const authOptions: AuthOptions = {
         };
       },
     }),
+
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: `${profile.given_name} ${profile.family_name}`,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+    }),
+
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {
-          label: "email",
-          placeholder: "example@example.com",
-          type: "email",
-        },
-        username: {
-          label: "username",
-          placeholder: "example10z",
-          type: "text",
+        emailOrUsername: {
+          label: "email or username",
+          placeholder: "example@gmail.com",
         },
         password: {
           label: "password",
@@ -50,16 +59,15 @@ export const authOptions: AuthOptions = {
       async authorize(credentials, req) {
         try {
           if (!credentials) throw new InvalidFieldsUserLogin();
-
           const userFound =
             (await prisma.user.findUnique({
               where: {
-                email: credentials.email,
+                username: credentials.emailOrUsername,
               },
             })) ||
             (await prisma.user.findUnique({
               where: {
-                username: credentials.username,
+                email: credentials.emailOrUsername,
               },
             }));
 

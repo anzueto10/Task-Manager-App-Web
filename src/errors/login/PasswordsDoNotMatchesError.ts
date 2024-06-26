@@ -1,7 +1,7 @@
 class PasswordsDoNotMatchesError extends Error {
   status: number;
   constructor() {
-    super("The password is incorrect");
+    super("The password or user are invalid.");
     this.status = 401;
   }
 }

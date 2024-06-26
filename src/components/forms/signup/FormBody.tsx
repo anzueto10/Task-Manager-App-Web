@@ -1,38 +1,41 @@
 "use client";
 
 import { FORM_SIGNUP_EXTERNAL_LINKS, SIGN_UP_FORM_FIELDS } from "@/consts";
-import { FormEvent, MouseEvent, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import getUserFormData from "@/utils/user/getUserFormData";
 import Link from "next/link";
-import { Providers } from "@/types";
+import { Providers, SignupInitialValues } from "@/types";
 import registerUser from "@/api/user/registerUser";
 import ResponseError from "@/errors/ResponseError";
 import loginUser from "@/api/user/loginUser";
 import { signIn } from "next-auth/react";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { bool, object, string } from "yup";
 
 const SignupFormBody: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
-  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const userData = getUserFormData(formData);
+  const handleSignUpSubmit = async (values: SignupInitialValues) => {
+    const { email, password, username } = values;
     try {
-      const newUser = await registerUser(userData);
-      const res = await loginUser(userData);
-      console.log(newUser);
+      const newUser = await registerUser(values);
+
+      {
+        /*const res = await signIn("credentials", {
+        emailOrUsername: email || username,
+        password,
+        redirect: false,
+      }); */
+      }
     } catch (e: unknown) {
-      if (e instanceof ResponseError) console.log(e.message);
-      else console.log(e);
+      if (e instanceof ResponseError) {
+      }
     }
   };
 
   const handleExternalSignIn = async (provider: Providers) => {
-    console.log(provider);
     setLoading(true);
     try {
       const response = await signIn(`${provider}`, {
@@ -46,6 +49,27 @@ const SignupFormBody: React.FC = () => {
     }
   };
 
+  const initialValues: SignupInitialValues = {
+    username: "",
+    email: "",
+    password: "",
+    termsAndConditions: false,
+  };
+
+  const signupValidationSchema = object({
+    email: string()
+      .email("Please enter a valid email.")
+      .required("Please enter your email."),
+    username: string()
+      .min(5, "Your password must have 5 characters or more.")
+      .required("Please enter your username"),
+    password: string()
+      .min(8, "Your password must have 8 characters or more.")
+      .required("Please enter your password."),
+    termsAndConditions: bool()
+      .oneOf([true], "Please accept the terms and conditions.")
+      .required("Please accept the terms and conditions."),
+  });
   return (
     <div className="w-full h-full bg-white rounded-lg shadow dark:border p-6 dark:bg-gray-800 dark:border-gray-700">
       <h1 className="text-xl font-bold mb-5 leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -60,72 +84,91 @@ const SignupFormBody: React.FC = () => {
           Login here
         </Link>
       </p>
-      <form className="" onSubmit={handleSignUp}>
-        {Object.entries(SIGN_UP_FORM_FIELDS).map(([key, field]) => (
-          <div className="mb-5" key={key}>
-            <label
-              htmlFor={field.value}
-              className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSignUpSubmit}
+        validationSchema={signupValidationSchema}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            {Object.entries(SIGN_UP_FORM_FIELDS).map(([key, field]) => (
+              <div className="mb-5" key={key}>
+                <label
+                  htmlFor={field.value}
+                  className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
+                >
+                  {field.text}
+                </label>
+                <Field
+                  type={
+                    field.value === "email"
+                      ? "email"
+                      : field.value === "password"
+                      ? "password"
+                      : "text"
+                  }
+                  name={field.value}
+                  id={field.value}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder={field.placeholder}
+                />
+                <ErrorMessage
+                  name={field.value}
+                  className="text-red-500"
+                  component="span"
+                ></ErrorMessage>
+              </div>
+            ))}
+            <div className="flex items-start mb-5 w-full">
+              <div className="flex items-center h-5">
+                <Field
+                  id="termsAndConditions"
+                  aria-describedby="termsAndConditions"
+                  type="checkbox"
+                  name="termsAndConditions"
+                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label
+                  htmlFor="termsAndConditions"
+                  className="font-light text-gray-500 dark:text-gray-300"
+                >
+                  I accept the{" "}
+                  <Link
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    href="#"
+                  >
+                    Terms and Conditions
+                  </Link>
+                </label>
+                <ErrorMessage
+                  name="termsAndConditions"
+                  className="text-red-500 text-sm ml-5"
+                  component="span"
+                ></ErrorMessage>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full mb-4 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 disabled:hover:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-primary-600 dark:disabled:hover:bg-primary-600"
+              disabled={isSubmitting}
             >
-              {field.text}
-            </label>
-            <input
-              type={
-                field.value === "email"
-                  ? "email"
-                  : field.value === "password"
-                  ? "password"
-                  : "text"
-              }
-              name={field.value}
-              id={field.value}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder={field.placeholder}
-              required={field.required}
-            />
-          </div>
-        ))}
-        <div className="flex items-start mb-5 w-full">
-          <div className="flex items-center h-5">
-            <input
-              id="terms"
-              aria-describedby="terms"
-              type="checkbox"
-              className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-              required
-            />
-          </div>
-          <div className="ml-3 text-sm">
-            <label
-              htmlFor="terms"
-              className="font-light text-gray-500 dark:text-gray-300"
-            >
-              I accept the{" "}
+              Create an account
+            </button>
+            <p className="text-sm text-black dark:text-white font-light w-full text-center">
+              Already have an account?{" "}
               <Link
+                href="/login/"
                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                href="#"
               >
-                Terms and Conditions
+                Login here
               </Link>
-            </label>
-          </div>
-        </div>
-        <button
-          type="submit"
-          className="w-full text-white mb-5 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-        >
-          Create an account
-        </button>
-        <p className="text-sm text-black dark:text-white font-light w-full text-center">
-          Already have an account?{" "}
-          <Link
-            href="/login/"
-            className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-          >
-            Login here
-          </Link>
-        </p>
-      </form>
+            </p>
+          </Form>
+        )}
+      </Formik>
       <div className="inline-flex relative items-center justify-center w-full my-5">
         <hr className="w-full h-px my-3" />
         <span className="absolute px-5 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-800">

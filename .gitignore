@@ -39,3 +39,8 @@ next-env.d.ts
 
 #prisma
 /prisma
+
+#db
+dev.deb 
+db.sqlite3
+db.db

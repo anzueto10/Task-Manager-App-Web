@@ -22,7 +22,7 @@ export const getTasks = async ({
     const data: Array<Task> = await res.json();
     return data;
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 };
 
@@ -52,7 +52,7 @@ export const createTask = async ({
     const data: Task = await res.json();
     return data;
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 };
 
@@ -84,7 +84,7 @@ export const editTask = async ({
     const data: Task = await res.json();
     return data;
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 };
 
@@ -108,6 +108,6 @@ export const deleteTask = async ({
       }
     );
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 };

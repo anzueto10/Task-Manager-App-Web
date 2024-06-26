@@ -1,12 +1,12 @@
 import { ERROR_NAMES } from "@/consts";
 
 class ResponseError extends Error {
-  response: Response;
-
-  constructor(response: Response, message?: string) {
-    super(message || response.statusText);
+  status: number;
+  constructor(message: string, status: number) {
+    super(message);
     this.name = ERROR_NAMES.RESPONSE_ERROR;
-    this.response = response;
+    this.message = message;
+    this.status = status;
   }
 }
 

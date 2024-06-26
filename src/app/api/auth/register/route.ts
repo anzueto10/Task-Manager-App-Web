@@ -2,14 +2,15 @@ import prisma from "@/libs/prisma";
 import { FormUserFields } from "@/types";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import InvalidFieldsUserRegisterError from "@/errors/server/signup/InvalidFieldsUserRegisterError";
+import InvalidFieldsUserRegisterError from "@/errors/signup/InvalidFieldsUserRegisterError";
 import {
   PrismaClientKnownRequestError,
   PrismaClientValidationError,
   PrismaClientInitializationError,
 } from "@prisma/client/runtime/library";
-import EmailAlredyInUseError from "@/errors/server/signup/EmailAlredyInUseError";
-import UsernameAlredyInUse from "@/errors/server/signup/UsernameAlredyInUseError";
+import EmailAlredyInUseError from "@/errors/signup/EmailAlredyInUseError";
+import UsernameAlredyInUse from "@/errors/signup/UsernameAlredyInUseError";
+import PrismaError from "@/errors/PrismaError";
 
 export const POST = async (req: Request) => {
   try {
@@ -64,7 +65,7 @@ export const POST = async (req: Request) => {
     } else if (e instanceof UsernameAlredyInUse) {
       return NextResponse.json(
         {
-          message: e.message,
+          error: e.message,
         },
         {
           status: e.status,
@@ -73,31 +74,22 @@ export const POST = async (req: Request) => {
     } else if (e instanceof EmailAlredyInUseError) {
       return NextResponse.json(
         {
-          message: e.message,
+          error: e.message,
         },
         {
           status: e.status,
         }
       );
-    } else if (e instanceof PrismaClientKnownRequestError) {
-      return NextResponse.json({ error: e.message }, { status: 500 });
-    } else if (e instanceof PrismaClientValidationError) {
-      return NextResponse.json({ error: e.message }, { status: 400 });
-    } else if (e instanceof PrismaClientInitializationError) {
-      return NextResponse.json({ error: e.message }, { status: 500 });
-    } else if (e instanceof Error) {
-      return NextResponse.json(
-        {
-          error: e.message,
-        },
-        {
-          status: 500,
-        }
-      );
+    } else if (
+      e instanceof PrismaClientKnownRequestError ||
+      e instanceof PrismaClientValidationError ||
+      e instanceof PrismaClientInitializationError
+    ) {
+      return NextResponse.json({ error: "Prisma Error." }, { status: 500 });
     } else {
       return NextResponse.json(
         {
-          error: "Internal Server Error",
+          error: "Internal Server Error.",
         },
         {
           status: 500,

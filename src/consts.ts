@@ -110,3 +110,5 @@ export const ERROR_NAMES = {
   INVALID_DESCRIPTION: "InvalidDescription",
   RESPONSE_ERROR: "ResponseError",
 };
+
+export const MAX_FORM_ATTEMPS = 3;

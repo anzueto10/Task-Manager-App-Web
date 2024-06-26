@@ -36,8 +36,6 @@ const LoginFormBody = () => {
 
       const error = res.error as string;
       const status = res.status as number;
-      console.log("fue aca");
-      console.log(error, status, res);
 
       if (error === "Internal Server Error.") throw new InternalServerError();
       throw new ResponseError(error, status);

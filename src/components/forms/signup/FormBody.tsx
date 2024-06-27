@@ -7,10 +7,11 @@ import Link from "next/link";
 import { Providers, SignupInitialValues } from "@/types";
 import registerUser from "@/api/user/registerUser";
 import ResponseError from "@/errors/ResponseError";
-import loginUser from "@/api/user/loginUser";
 import { signIn } from "next-auth/react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { bool, object, string } from "yup";
+import ExternalSignLinks from "@/components/forms/ExternalSignLinks";
+import HorizontalRuleForm from "@/components/forms/HorizontalRuleForm";
 
 const SignupFormBody: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -169,25 +170,9 @@ const SignupFormBody: React.FC = () => {
           </Form>
         )}
       </Formik>
-      <div className="inline-flex relative items-center justify-center w-full my-5">
-        <hr className="w-full h-px my-3" />
-        <span className="absolute px-5 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-800">
-          Or
-        </span>
-      </div>
+      <HorizontalRuleForm bgColor="bg-white" bgColorDark="bg-gray-800" />
 
-      <div className="flex flex-col w-full h-fit">
-        {Object.entries(FORM_SIGNUP_EXTERNAL_LINKS).map(([key, link]) => (
-          <button
-            onClick={() => handleExternalSignIn(link.href as Providers)}
-            key={key}
-            className="p-3 flex flex-row justify-center items-center font-medium text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 rounded-lg text-sm px-5 py-2.5 me-2 mb-5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-          >
-            <link.Icon h="25" w="25" />
-            <span className="ml-3">{link.text}</span>
-          </button>
-        ))}
-      </div>
+      <ExternalSignLinks handleSignIn={handleExternalSignIn} />
     </div>
   );
 };

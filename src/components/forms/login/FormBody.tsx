@@ -7,8 +7,10 @@ import Link from "next/link";
 import { object, string } from "yup";
 import { useRef, useState } from "react";
 import PrismaError from "@/errors/PrismaError";
-import { LoginInitialValues } from "@/types";
+import { LoginInitialValues, Providers } from "@/types";
 import InternalServerError from "@/errors/InternalServerError";
+import ExternalSignLinks from "../ExternalSignLinks";
+import HorizontalRuleForm from "../HorizontalRuleForm";
 
 const LoginFormBody = () => {
   const router = useRouter();
@@ -63,12 +65,28 @@ const LoginFormBody = () => {
     password: "",
   };
 
+  const handleExternalSignIn = async (provider: Providers) => {
+    try {
+      const response = await signIn(`${provider}`, {
+        callbackUrl: "/",
+        redirect: false,
+      });
+    } catch (e) {
+      console.error(`Error al iniciar sesión con ${provider}`, e);
+    } finally {
+    }
+  };
+
   return (
-    <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full rounded-lg shadow h-full md:mt-0 xl:p-0 bg-transparent">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 className="text-xl font-bold mb-4 leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
           Log in to your account
         </h1>
+        <ExternalSignLinks handleSignIn={handleExternalSignIn} />
+
+        <HorizontalRuleForm bgColor="bg-white" bgColorDark="bg-gray-900" />
+
         {errorLogin && <span className="text-red-500 mt-3">{errorLogin}</span>}
         <Formik
           innerRef={formikRef}

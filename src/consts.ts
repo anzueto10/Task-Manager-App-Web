@@ -111,4 +111,7 @@ export const ERROR_NAMES = {
   RESPONSE_ERROR: "ResponseError",
 };
 
-export const MAX_FORM_ATTEMPS = 3;
+export const LOGIN_FORM_TITLE = "Explore the best way to manage your projects.";
+
+export const LOGIN_FORM_DESCRIPTION =
+  "Millions of designers and agencies around the world showcase their portfolio work on Flowbite - the home to the world’s best design and creative professionals.";

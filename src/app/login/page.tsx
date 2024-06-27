@@ -1,14 +1,14 @@
 import LoginFormBody from "@/components/forms/login/FormBody";
-import LoginFormTitle from "@/components/forms/login/FormTitle";
+import LoginFormImage from "@/components/forms/login/FormImage";
 
 const LoginPage: React.FC = () => {
   return (
-    <section className="flex flex-col w-full items-center px-6 py-8 h-full lg:py-0">
-      <article className="w-full md:w-5/12 h-full flex flex-col justify-center">
-        <header className="">
-          <LoginFormTitle />
-        </header>
+    <section className="w-full h-full flex flex-row items-center justify-center">
+      <article className="flex flex-col items-center justify-center px-6 py-8 h-fit mx-auto w-full md:w-3/4 lg:w-2/4">
         <LoginFormBody />
+      </article>
+      <article className="w-2/4 hidden  h-full lg:flex">
+        <LoginFormImage />
       </article>
     </section>
   );

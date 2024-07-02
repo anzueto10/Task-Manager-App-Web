@@ -15,7 +15,7 @@ export const GET = async (req: Request, { params }: Params) => {
   try {
     const project = await prisma.project.findUnique({
       where: {
-        id: Number(projectId),
+        id: projectId,
       },
     });
 
@@ -41,7 +41,7 @@ export const PUT = async (req: Request, { params }: Params) => {
   try {
     const newProject = await prisma.project.update({
       where: {
-        id: Number(projectId),
+        id: projectId,
       },
       data: {
         title,
@@ -68,7 +68,9 @@ export const DELETE = async (req: Request, { params }: Params) => {
 
   try {
     const deletedProject = await prisma.project.delete({
-      where: { id: Number(projectId) },
+      where: {
+        id: projectId,
+      },
     });
 
     return NextResponse.json(deletedProject);

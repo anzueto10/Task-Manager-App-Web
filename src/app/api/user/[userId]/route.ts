@@ -26,7 +26,7 @@ export const GET = async (req: Request, { params }: GetParams) => {
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id: Number(id),
+        id,
       },
     });
 
@@ -51,7 +51,7 @@ export const PUT = async (req: Request, { params }: PutParams) => {
   try {
     const newUser = await prisma.user.update({
       where: {
-        id: Number(userId),
+        id: userId,
       },
       data: {
         email,

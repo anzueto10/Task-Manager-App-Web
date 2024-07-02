@@ -4,7 +4,12 @@ import Link from "next/link";
 
 const HomePage: React.FC = () => {
   const { data: session } = useSession();
-  return <Link href="/app">{session?.user?.name}</Link>;
+  return (
+    <Link href="/app" className="text-white">
+      <p>{session?.user.id}</p>
+      {session?.user.id}
+    </Link>
+  );
 };
 
 export default HomePage;

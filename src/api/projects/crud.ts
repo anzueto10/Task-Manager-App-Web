@@ -1,9 +1,9 @@
 import { type FormProjectFields, type Project, type User } from "@/types";
 
-export const getProjects = async (userId: User["id"]) => {
+export const getProjects = async ({ userId }: { userId: User["id"] }) => {
   try {
     const res: Response = await fetch(
-      `${process.env.BACKEND_URL_PROJECTS}user/${userId}/project`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/project`
     );
 
     if (!res.ok) {
@@ -27,7 +27,7 @@ export const createProject = async ({
 }) => {
   try {
     const res: Response = await fetch(
-      `${process.env.BACKEND_URL_PROJECTS}/user/${userId}/project`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/project`,
       {
         method: "POST",
         body: JSON.stringify(projectData),

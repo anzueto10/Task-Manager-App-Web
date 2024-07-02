@@ -73,6 +73,7 @@ const LoginFormBody = () => {
       });
     } catch (e) {
       console.error(`Error al iniciar sesión con ${provider}`, e);
+      router.push("/login/");
     } finally {
     }
   };

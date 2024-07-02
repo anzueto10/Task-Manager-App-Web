@@ -7,7 +7,7 @@ const LoginPage: React.FC = () => {
       <article className="flex flex-col items-center justify-center px-6 py-8 h-fit mx-auto w-full md:w-3/4 lg:w-2/4">
         <LoginFormBody />
       </article>
-      <article className="w-2/4 hidden  h-full lg:flex">
+      <article className="w-2/4 hidden  h-full bg-ingi lg:flex">
         <LoginFormImage />
       </article>
     </section>

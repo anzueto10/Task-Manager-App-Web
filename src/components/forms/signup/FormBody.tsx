@@ -1,7 +1,7 @@
 "use client";
 
 import { FORM_SIGNUP_EXTERNAL_LINKS, SIGN_UP_FORM_FIELDS } from "@/consts";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Providers, SignupInitialValues } from "@/types";
@@ -12,26 +12,59 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { bool, object, string } from "yup";
 import ExternalSignLinks from "@/components/forms/ExternalSignLinks";
 import HorizontalRuleForm from "@/components/forms/HorizontalRuleForm";
+import EmailAlredyInUseError from "@/errors/signup/EmailAlredyInUseError";
+import UsernameAlredyInUse from "@/errors/signup/UsernameAlredyInUseError";
+import InvalidFieldsUserLogin from "@/errors/login/InvalidFieldsUserLogin";
+import PrismaError from "@/errors/PrismaError";
+import InternalServerError from "@/errors/InternalServerError";
 
 const SignupFormBody: React.FC = () => {
+  const [errorRegisterUser, setErrorRegisterUser] = useState<string | null>();
   const [loading, setLoading] = useState(false);
+  const formikRef = useRef<any>(null);
+  const [submitted, setSubmitted] = useState<boolean | null>();
 
   const router = useRouter();
 
   const handleSignUpSubmit = async (values: SignupInitialValues) => {
+    setSubmitted(true);
     const { email, password, username } = values;
+
     try {
       const newUser = await registerUser(values);
 
-      {
-        /*const res = await signIn("credentials", {
+      const res = await signIn("credentials", {
         emailOrUsername: email || username,
         password,
         redirect: false,
-      }); */
+      });
+
+      if (!res) throw new ResponseError("The server do not response", 500);
+      //All is good
+      if (!(!res.ok || res.error)) {
+        router.push("/app/");
+        return;
       }
+
+      const error = res.error as string;
+      const status = res.status as number;
+
+      if (error === "Internal Server Error.") throw new InternalServerError();
+      throw new ResponseError(error, status);
     } catch (e: unknown) {
       if (e instanceof ResponseError) {
+        setErrorRegisterUser(e.message);
+      } else if (
+        e instanceof EmailAlredyInUseError ||
+        e instanceof UsernameAlredyInUse ||
+        e instanceof InvalidFieldsUserLogin
+      )
+        setErrorRegisterUser(e.message);
+      else if (e instanceof PrismaError || e instanceof InternalServerError) {
+        if (!formikRef.current) return;
+        if (!submitted) formikRef.current.submitForm();
+      } else {
+        setErrorRegisterUser("An unexpected error occurred, please try again");
       }
     }
   };
@@ -45,6 +78,7 @@ const SignupFormBody: React.FC = () => {
       });
     } catch (e) {
       console.error(`Error al iniciar sesión con ${provider}`, e);
+      router.push("/login/");
     } finally {
       setLoading(false);
     }
@@ -72,7 +106,7 @@ const SignupFormBody: React.FC = () => {
       .required("Please accept the terms and conditions."),
   });
   return (
-    <div className="w-full h-full bg-white rounded-lg shadow dark:border p-6 dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-full h-full flex flex-col bg-white rounded-lg shadow dark:border p-6 dark:bg-gray-800 dark:border-gray-700">
       <h1 className="text-xl font-bold mb-5 leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
         Create an account
       </h1>
@@ -85,10 +119,15 @@ const SignupFormBody: React.FC = () => {
           Login here
         </Link>
       </p>
+      {errorRegisterUser && (
+        <span className="text-red-500 mb-3">{errorRegisterUser}</span>
+      )}
+
       <Formik
         initialValues={initialValues}
         onSubmit={handleSignUpSubmit}
         validationSchema={signupValidationSchema}
+        innerRef={formikRef}
       >
         {({ isSubmitting }) => (
           <Form>

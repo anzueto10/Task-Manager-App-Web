@@ -1,5 +1,5 @@
-import SignupFormBody from "@/components/forms/signup/FormBody";
-import SignupImageForm from "@/components/forms/signup/FormImage";
+import SignupFormBody from "@/components/signup/form/FormBody";
+import SignupImageForm from "@/components/signup/form/FormImage";
 
 const SignupPage: React.FC = () => {
   return (

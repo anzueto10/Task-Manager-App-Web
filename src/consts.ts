@@ -1,6 +1,10 @@
 import AppleIcon from "@/components/ui/icons/AppleIcon";
 import FacebookIcon from "@/components/ui/icons/FacebookIcon";
 import GoogleIcon from "@/components/ui/icons/GoogleIcon";
+import SettingsIcon from "@/components/ui/icons/SettingsIcon";
+import NotificationsIcon from "@/components/ui/icons/NotificationsIcon";
+import HelpIcon from "@/components/ui/icons/HelpIcon";
+import UserIcon from "@/components/ui/icons/UserIcon";
 
 export const USER_FIELDS = {
   USERNAME: "username",
@@ -32,8 +36,8 @@ export const PROJECT_FIELDS = {
 
 export const STATUS_TEXTS = {
   BACK_LOG: { value: "backlog", text: "Backlog" },
-  IN_PROGRESS: { value: "in_progress", text: "In Progress" },
-  IN_REVIEW: { value: "in_review", text: "In Review" },
+  IN_PROGRESS: { value: "inProgress", text: "In Progress" },
+  IN_REVIEW: { value: "inReview", text: "In Review" },
   COMPLETED: { value: "completed", text: "Completed" },
 } as const;
 
@@ -115,3 +119,26 @@ export const LOGIN_FORM_TITLE = "Explore the best way to manage your projects.";
 
 export const LOGIN_FORM_DESCRIPTION =
   "Millions of designers and agencies around the world showcase their portfolio work on Flowbite - the home to the world’s best design and creative professionals.";
+
+export const DROPDOWN_USER_OPTIONS = {
+  ACCOUNT: {
+    text: "Account",
+    href: "/account/",
+    Icon: UserIcon,
+  },
+  SETTINGS: {
+    text: "Settings",
+    href: "/settings/",
+    Icon: SettingsIcon,
+  },
+  NOTIFICATIONS: {
+    text: "Notifications",
+    href: "/notifications/",
+    Icon: NotificationsIcon,
+  },
+  HELP: {
+    text: "Help",
+    href: "/help/",
+    Icon: HelpIcon,
+  },
+};

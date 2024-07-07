@@ -3,6 +3,7 @@ import "./globals.css";
 import { fontBody, fontHeading, fontDarkBody, fontDarkHeading } from "./fonts";
 import { getServerSession } from "next-auth";
 import { Providers } from "@/app/providers";
+import cn from "@/libs/classNames";
 
 export const metadata: Metadata = {
   title: "Task Manager App",
@@ -18,10 +19,10 @@ const RootLayout = async ({
 }: Readonly<{ children: React.ReactNode }>) => {
   const session = await getServerSession();
   return (
-    <html
-      className={`${fontBody.variable} ${fontHeading.variable} ${fontDarkBody.variable} ${fontDarkHeading.variable}`}
-    >
-      <body className="h-dvh w-screen bg-background-light dark:bg-background-dark">
+    <html>
+      <body
+        className={cn("antialiased", fontHeading.variable, fontBody.variable)}
+      >
         <Providers session={session}>{children}</Providers>
       </body>
     </html>

@@ -1,3 +1,4 @@
+"use client";
 const GoogleIcon = ({ w, h }: { w: string; h: string }) => {
   return (
     <svg

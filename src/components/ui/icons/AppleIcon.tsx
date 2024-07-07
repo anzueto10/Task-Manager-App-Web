@@ -1,3 +1,5 @@
+"use client";
+
 const AppleIcon = ({ h, w }: { h: string; w: string }) => {
   return (
     <svg

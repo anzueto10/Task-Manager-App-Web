@@ -1,7 +1,5 @@
 import { FormTaskFields } from "@/types";
 
-const saveTask = (data: FormTaskFields): void => {
-  console.log(data);
-};
+const saveTask = (data: FormTaskFields): void => {};
 
 export default saveTask;

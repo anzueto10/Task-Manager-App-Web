@@ -7,8 +7,8 @@ export type Status = (typeof STATUS_TEXTS)[keyof typeof STATUS_TEXTS];
 export type StatusTextClient =
   (typeof STATUS_TEXTS_CLIENT)[keyof typeof STATUS_TEXTS_CLIENT];
 
-export type StatusValue = typeof STATUS_TEXTS[keyof typeof STATUS_TEXTS]['value'];
-
+export type StatusValue =
+  (typeof STATUS_TEXTS)[keyof typeof STATUS_TEXTS]["value"];
 
 export interface User {
   id: string;
@@ -28,10 +28,10 @@ export interface FormUserFields {
 export interface Task {
   id: string;
   title: string;
-  description: string;
-  image: string;
+  description?: string;
+  image?: string;
   status: StatusValue;
-  tags: Array<string>;
+  tags?: Array<string>;
   createdAt: string;
   project: string;
 }
@@ -40,9 +40,9 @@ export interface FormTaskFields {
   title: string;
   description: string;
   status: Status;
-  tags: Array<string>;
+  tags?: Array<string>;
   projectId: number;
-  image: File;
+  image?: File;
 }
 
 export interface TaskTag {
@@ -92,7 +92,13 @@ export interface ProjectFormInitialVales {
   description: string;
 }
 
-export interface TaskFormInitialValues {}
+export interface TaskFormInitialValues {
+  title: string;
+  description?: string;
+  tags?: Array<TaskTag>;
+  status: StatusValue;
+  image?: File;
+}
 
 export type IconSize = (typeof ICON_SIZES)[keyof typeof ICON_SIZES];
 
@@ -107,3 +113,53 @@ type Session = Session & {
     id: string;
   };
 };
+
+export interface DropdownOption {
+  text: string;
+  href: string;
+  Icon: React.FC;
+}
+
+export type VariableTypesButton = "close" | "outline" | "default";
+
+export type RoundedTypesButton = "md" | "lg" | "sm" | "full";
+
+export type PositionTypesButton = "top" | "bottom" | "left" | "right";
+
+export type TypeTypesButton = "submit" | "button" | "reset";
+
+export interface ModalFormDefaultProps<T> {
+  formName: string;
+  closeModal: () => void;
+}
+
+export interface ProjectFormProps {
+  projectTitle?: string;
+  projectDescription?: string;
+}
+
+export interface TaskFormProps {
+  taskTitle?: string;
+  taskDescription?: string;
+  taskTags?: Array<TaskTag>;
+  taskStatus?: StatusValue;
+  taskImage?: string;
+}
+
+type ExcludeClose<T> = T extends "close" ? never : T;
+
+export type VariableTypesButtonExcludeClose = ExcludeClose<VariableTypesButton>;
+export interface ModalDefaultProps {
+  openButtonRounded?: RoundedTypesButton;
+  modalFormName: string;
+  openButtonVariable?: VariableTypesButtonExcludeClose;
+  buttonActionText: string;
+  buttonCancelText: string;
+  buttonText?: string;
+  Form: React.FC<ModalFormDefaultProps<ProjectFormProps | TaskFormProps>>;
+  positionButton?: PositionTypesButton;
+  modalTitle?: string;
+  modalDescription?: string;
+  formProps?: TaskFormProps | ProjectFormProps;
+  ModalIcon?: React.FC;
+}

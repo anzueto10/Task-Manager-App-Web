@@ -1,7 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
 import { type FormTaskFields, type Project, type User } from "@/types";
-import { TaskTag, type Task } from "@prisma/client";
+import type { TaskTag, Task } from "@prisma/client";
+import cloudinary from "@/libs/cloudinary";
+import { UploadApiResponse } from "cloudinary/types";
 
 interface Params {
   params: {
@@ -12,10 +14,11 @@ interface Params {
 
 export const GET = async (req: Request, { params }: Params) => {
   const { userId, projectId } = params;
+
   try {
     const tasks = await prisma.task.findMany({
       where: {
-        projectId: Number(projectId),
+        projectId: projectId,
       },
     });
 
@@ -33,41 +36,74 @@ export const GET = async (req: Request, { params }: Params) => {
   }
 };
 
-export const PUT = async (req: Request, { params }: Params) => {
-  const { userId, projectId } = params;
-  const data: FormTaskFields = await req.json();
-  const { description, status, image, tags, title } = data;
-
-  const imageBuffer = Buffer.from(image).toString("base64");
-
+export const POST = async (req: NextRequest, { params }: Params) => {
   try {
+    const { userId, projectId } = params;
+
+    const formData = await req.formData();
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
+    const status = formData.get("status") as string;
+    const imageFile = formData.get("image") as File | null;
+    const tagsString = formData.get("tags") as string | null;
+
+    let tags: Array<TaskTag> = [];
+    if (tagsString) {
+      tags = JSON.parse(tagsString) as Array<TaskTag>;
+    }
+
+    let imageResponse: UploadApiResponse | undefined;
+    if (imageFile) {
+      const bytes = await imageFile.arrayBuffer();
+      const imageBuffer = Buffer.from(bytes);
+      const uploadOptions = {
+        folder: `users/${userId}/projects/${projectId}/taskImages`,
+      };
+
+      imageResponse = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream({}, (error, result) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(result);
+            }
+          })
+          .end(imageBuffer);
+      });
+    }
+
     const newTask = await prisma.task.create({
       data: {
         title,
         description,
         projectId,
-        status: status.text,
-        image: imageBuffer,
+        status,
+        image: imageResponse ? imageResponse.secure_url : null,
+        userId,
       },
     });
 
-    const newTags = await prisma.taskTag.createMany({
-      data: tags as unknown as TaskTag[],
-    });
+    if (tags.length > 0) {
+      await prisma.taskTag.createMany({
+        data: tags.map((tag) => ({
+          name: tag.name,
+          taskId: newTask.id,
+        })),
+      });
+    }
 
     return NextResponse.json({
-      ...newTask,
-      ...newTags,
+      newTask,
     });
-  } catch (e) {
-    if (e instanceof Error)
-      return NextResponse.json(
-        {
-          error: e.message,
-        },
-        {
-          status: 500,
-        }
-      );
+  } catch (e: any) {
+    return NextResponse.json(
+      {
+        error: e.message || "Hubo un error al procesar la solicitud.",
+      },
+      {
+        status: 500,
+      }
+    );
   }
 };

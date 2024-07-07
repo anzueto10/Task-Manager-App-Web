@@ -1,6 +1,5 @@
-import { getProjects } from "@/api/projects/crud";
-import TaskLayouts from "@/components/layouts/TasksLayout";
-import NavbarApp from "@/components/ui/navbars/NavbarApp";
+import TaskLayouts from "@/components/tasks/layouts/TasksLayout";
+import NavbarApp from "@/components/app/navbars/NavbarApp";
 
 const TaskAppPage: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChakraProvider } from "@chakra-ui/react";
+import useToggleTheme from "@/hooks/useToggleTheme";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
@@ -12,11 +12,10 @@ export const Providers = ({
   children: React.ReactNode;
   session: Session | null;
 }) => {
+  const {} = useToggleTheme();
   return (
     <SessionProvider session={session}>
-      <RecoilRoot>
-        <ChakraProvider>{children}</ChakraProvider>
-      </RecoilRoot>
+      <RecoilRoot>{children}</RecoilRoot>
     </SessionProvider>
   );
 };

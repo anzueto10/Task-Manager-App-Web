@@ -1,3 +1,5 @@
+"use client";
+
 const FacebookIcon = ({ h, w }: { h: string; w: string }) => {
   return (
     <svg

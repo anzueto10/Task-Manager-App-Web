@@ -4,13 +4,12 @@
 
 @layer base {
     * {
-        @apply border-border-light;
-        @apply dark:border-border-dark;
+        @apply border-border-light dark:border-border-dark text-foreground-light dark:text-foreground-dark;
     }
 
     body {
-        @apply bg-background-light text-foreground-light;
-        font-family: var(--font-body);
+        @apply bg-background-light dark:bg-background-dark;
+        @apply font-body
     }
 
     h1,
@@ -19,19 +18,6 @@
     h4,
     h5,
     h6 {
-        font-family: var(--font-heading);
-    }
-
-    body.dark {
-        font-family: var(--font-dark-body);
-    }
-
-    body.dark h1,
-    body.dark h2,
-    body.dark h3,
-    body.dark h4,
-    body.dark h5,
-    body.dark h6 {
-        font-family: var(--font-dark-heading);
+        @apply font-heading dark:font-heading text-primary-light dark:text-primary-dark
     }
 }

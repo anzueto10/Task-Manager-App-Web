@@ -1,5 +1,5 @@
-import LoginFormBody from "@/components/forms/login/FormBody";
-import LoginFormImage from "@/components/forms/login/FormImage";
+import LoginFormBody from "@/components/login/form/FormBody";
+import LoginFormImage from "@/components/login/form/FormImage";
 
 const LoginPage: React.FC = () => {
   return (

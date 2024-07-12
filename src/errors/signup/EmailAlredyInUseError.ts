@@ -5,7 +5,6 @@ class EmailAlredyInUseError extends Error {
     this.message = "The email already has an associated account.";
     this.status = 400;
     this.name = "EmailAlredyInUseError";
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 

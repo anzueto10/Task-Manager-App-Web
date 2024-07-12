@@ -6,7 +6,6 @@ class InvalidFieldsUserLogin extends Error {
     this.status = 400;
     this.message = "The fields can't be null.";
     this.name = "InvalidFieldsUserLogin";
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 

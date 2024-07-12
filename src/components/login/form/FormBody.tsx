@@ -10,7 +10,7 @@ import PrismaError from "@/errors/PrismaError";
 import { LoginInitialValues, Providers } from "@/types";
 import InternalServerError from "@/errors/InternalServerError";
 import ExternalSignLinks from "@/components/auth/ExternalSignLinks";
-import HorizontalRuleForm from "@/components/ui/HorizontalRuleOr";
+import HorizontalRuleForm from "@/components/ui/dividers/HorizontalRuleOr";
 
 const LoginFormBody = () => {
   const router = useRouter();

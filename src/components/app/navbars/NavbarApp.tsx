@@ -2,9 +2,9 @@ import { getProjects } from "@/api/projects/crud";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import AppDrawer from "@/components/app/drawers/AppDrawer";
 import { getServerSession } from "next-auth";
-import Dropdown from "../../ui/Dropdown";
+import Dropdown from "@/components/ui/dropdown/Dropdown";
 import { DROPDOWN_USER_OPTIONS } from "@/consts";
-import UserIcon from "../../ui/icons/UserIcon";
+import UserIcon from "@/components/ui/icons/UserIcon";
 import Link from "next/link";
 
 const NavbarApp: React.FC = async () => {

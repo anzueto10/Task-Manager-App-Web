@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil";
 
 const ProjectsContainer: React.FC = () => {
   const projects = useRecoilValue(projectsState);
+
   return (
     <>
       {projects.length > 0 && (

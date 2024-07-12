@@ -1,8 +1,9 @@
-import { type StatusTextClient, type Task } from "@/types";
+import type { Project, StatusValue, Task } from "@/types";
 import TaskCard from "@/components/tasks/cards/TaskCard";
 import { TabPanel } from "@headlessui/react";
 
 interface Props {
+  status: StatusValue;
   tasks: Array<Task>;
 }
 

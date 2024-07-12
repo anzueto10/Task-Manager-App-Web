@@ -1,11 +1,11 @@
 "use client";
 import { ADD_BUTTONS_TEXT } from "@/consts";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectsContainer from "@/components/projects/containers/ProjectsContainer";
 import { Project } from "@/types";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { projectsState } from "@/store/atoms";
-import CreateForm from "../../projects/forms/CreateForm";
+import CreateProject from "@/components/projects/forms/CreateProject";
 import {
   Dialog,
   DialogBackdrop,
@@ -13,10 +13,11 @@ import {
   DialogTitle,
   TransitionChild,
 } from "@headlessui/react";
-import MenuIcon from "../../ui/icons/MenuIcon";
-import Button from "../../ui/Button";
-import Squares from "../../ui/icons/Squares";
-import FormModal from "@/components/ui/FormModal";
+import MenuIcon from "@/components/ui/icons/MenuIcon";
+import Button from "@/components/ui/button/Button";
+import Squares from "@/components/ui/icons/Squares";
+import FormModal from "@/components/ui/modal/FormModal";
+import { useSelectProject } from "@/store/actions";
 
 interface Props {
   initialProjects: Array<Project>;
@@ -24,11 +25,15 @@ interface Props {
 
 const AppDrawer: React.FC<Props> = ({ initialProjects }) => {
   const [open, setOpen] = useState(false);
-  const setProjects = useSetRecoilState(projectsState);
+  const [projects, setProjects] = useRecoilState(projectsState);
+  const selectProject = useSelectProject();
 
   useEffect(() => {
-    setProjects(initialProjects);
-  }, [initialProjects, setProjects]);
+    if (projects.length === 0 && initialProjects.length > 0) {
+      setProjects(initialProjects);
+      selectProject(initialProjects[0].id);
+    }
+  }, [initialProjects, selectProject, setProjects]);
   return (
     <>
       <Button onClick={() => setOpen(true)} variable="outline">
@@ -71,19 +76,20 @@ const AppDrawer: React.FC<Props> = ({ initialProjects }) => {
                   </DialogTitle>
                   <hr className="my-5 h-0.5 border-t-0 bg-secondary-light dark:bg-secondary-dark" />
                   <main className="relative flex-1 px-4 sm:px-6 overflow-y-auto">
-                    <Suspense>
-                      <ProjectsContainer />
-                    </Suspense>
-                    <FormModal
-                      modalFormName="ModalCreateProjectForm"
-                      buttonText={ADD_BUTTONS_TEXT.PROJECT}
-                      Form={CreateForm}
-                      modalDescription="Fill out the form to create a new project."
-                      modalTitle={ADD_BUTTONS_TEXT.PROJECT}
-                      buttonActionText="Create Project"
-                      buttonCancelText="Cancel"
-                      openButtonVariable="outline"
-                    />
+                    <ProjectsContainer />
+                    <div className="mt-5">
+                      <FormModal
+                        modalFormName="ModalCreateProjectForm"
+                        buttonText={ADD_BUTTONS_TEXT.PROJECT}
+                        Form={CreateProject}
+                        modalDescription="Fill out the form to create a new project."
+                        modalTitle={ADD_BUTTONS_TEXT.PROJECT}
+                        buttonActionText="Create Project"
+                        buttonCancelText="Cancel"
+                        openButtonVariable="outline"
+                        typeOfForm="project"
+                      />
+                    </div>
                   </main>
                   <footer></footer>
                 </aside>

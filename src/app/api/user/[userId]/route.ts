@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
 import { FormUserFields, User } from "@/types";
+import { authOptions } from "../../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth";
 
 interface GetParams {
   params: {
@@ -22,6 +24,7 @@ interface DeleteParams {
 }
 
 export const GET = async (req: Request, { params }: GetParams) => {
+  const session = await getServerSession(authOptions);
   const { userId: id } = params;
   try {
     const user = await prisma.user.findUnique({
@@ -47,7 +50,7 @@ export const GET = async (req: Request, { params }: GetParams) => {
 
 export const PUT = async (req: Request, { params }: PutParams) => {
   const { userId } = params;
-  const { email, name, password, username } = params.userData;
+  const { email, password, username } = params.userData;
   try {
     const newUser = await prisma.user.update({
       where: {
@@ -81,7 +84,7 @@ export const DELETE = async (request: Request, { params }: DeleteParams) => {
   try {
     const deletedUser = await prisma.user.delete({
       where: {
-        id: Number(userId),
+        id: userId,
       },
     });
 

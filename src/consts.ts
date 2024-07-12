@@ -5,6 +5,7 @@ import SettingsIcon from "@/components/ui/icons/SettingsIcon";
 import NotificationsIcon from "@/components/ui/icons/NotificationsIcon";
 import HelpIcon from "@/components/ui/icons/HelpIcon";
 import UserIcon from "@/components/ui/icons/UserIcon";
+import LogoutIcon from "./components/ui/icons/LogoutIcon";
 
 export const USER_FIELDS = {
   USERNAME: "username",
@@ -142,3 +143,8 @@ export const DROPDOWN_USER_OPTIONS = {
     Icon: HelpIcon,
   },
 };
+
+//Clases
+
+export const TEXT_AREA_CLASSES =
+  "flex resize-none w-full rounded-md border border-input bg-background-light border-input-light ring-offset-background-light placeholder:text-mutedForeground-light focus-visible:ring-ring-light dark:bg-background-dark dark:border-input-dark dark:ring-offset-background-dark dark:placeholder:text-mutedForeground-dark dark:focus-visible:ring-ring-dark px-3 py-2 text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 col-span-3 p-2.5";

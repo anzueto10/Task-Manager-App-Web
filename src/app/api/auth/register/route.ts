@@ -1,6 +1,6 @@
 import prisma from "@/libs/prisma";
 import { FormUserFields } from "@/types";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import InvalidFieldsUserRegisterError from "@/errors/signup/InvalidFieldsUserRegisterError";
 import {
@@ -10,14 +10,14 @@ import {
 } from "@prisma/client/runtime/library";
 import EmailAlredyInUseError from "@/errors/signup/EmailAlredyInUseError";
 import UsernameAlredyInUse from "@/errors/signup/UsernameAlredyInUseError";
-import PrismaError from "@/errors/PrismaError";
 
-export const POST = async (req: Request) => {
+export const POST = async (req: NextRequest) => {
+  const formData = await req.formData();
+
+  const email = formData.get("email") as FormUserFields["email"];
+  const password = formData.get("password") as FormUserFields["password"];
+  const username = formData.get("username") as FormUserFields["username"];
   try {
-    const data: FormUserFields = await req.json();
-
-    const { email, password, username } = data;
-
     if (!email || !password || !username)
       throw new InvalidFieldsUserRegisterError();
 

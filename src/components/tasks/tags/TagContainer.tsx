@@ -1,9 +1,8 @@
-import { TASK_FIELDS } from "@/consts";
-import { Task } from "@/types";
 import TagCard from "@/components/tasks/tags/TagCard";
+import { TaskTag } from "@/types";
 
 interface Props {
-  tags: Task[typeof TASK_FIELDS.TAGS];
+  tags: Array<TaskTag>;
 }
 
 const TagContainer: React.FC<Props> = ({ tags }) => {

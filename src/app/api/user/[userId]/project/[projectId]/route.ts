@@ -1,6 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
 import { FormProjectFields, type Project, type User } from "@/types";
+import cloudinary from "@/libs/cloudinary";
+import { error } from "console";
 
 interface Params {
   params: {
@@ -9,12 +11,13 @@ interface Params {
   };
 }
 
-export const GET = async (req: Request, { params }: Params) => {
+export const GET = async (req: NextRequest, { params }: Params) => {
   const { userId, projectId } = params;
 
   try {
     const project = await prisma.project.findUnique({
       where: {
+        userId,
         id: projectId,
       },
     });
@@ -34,13 +37,15 @@ export const GET = async (req: Request, { params }: Params) => {
   }
 };
 
-export const PUT = async (req: Request, { params }: Params) => {
-  const { projectId } = params;
-  const data: FormProjectFields = await req.json();
-  const { description, title } = data;
+export const PUT = async (req: NextRequest, { params }: Params) => {
+  const { projectId, userId } = params;
+  const formData = await req.formData();
+  const title = formData.get("title") as Project["title"];
+  const description = formData.get("description") as Project["description"];
   try {
-    const newProject = await prisma.project.update({
+    const editedProject = await prisma.project.update({
       where: {
+        userId,
         id: projectId,
       },
       data: {
@@ -49,7 +54,9 @@ export const PUT = async (req: Request, { params }: Params) => {
       },
     });
 
-    return NextResponse.json(newProject);
+    if (!editedProject) throw new Error("El proyecto no existe");
+
+    return NextResponse.json(editedProject);
   } catch (e) {
     if (e instanceof Error)
       return NextResponse.json(
@@ -63,18 +70,23 @@ export const PUT = async (req: Request, { params }: Params) => {
   }
 };
 
-export const DELETE = async (req: Request, { params }: Params) => {
+export const DELETE = async (req: NextRequest, { params }: Params) => {
   const { userId, projectId } = params;
-
   try {
     const deletedProject = await prisma.project.delete({
       where: {
+        userId,
         id: projectId,
       },
     });
 
+    if (!deletedProject) throw new Error("Project do not exits");
+
+    await cloudinary.api.delete_folder(`users/${userId}/projects/${projectId}`);
+
     return NextResponse.json(deletedProject);
   } catch (e) {
+    console.log(e);
     if (e instanceof Error) {
       return NextResponse.json(
         {
@@ -83,6 +95,13 @@ export const DELETE = async (req: Request, { params }: Params) => {
         {
           status: 500,
         }
+      );
+    } else {
+      return NextResponse.json(
+        {
+          error: e,
+        },
+        { status: 500 }
       );
     }
   }

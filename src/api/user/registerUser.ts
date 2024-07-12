@@ -4,18 +4,15 @@ import ResponseError from "@/errors/ResponseError";
 import InvalidFieldsUserLogin from "@/errors/login/InvalidFieldsUserLogin";
 import EmailAlredyInUseError from "@/errors/signup/EmailAlredyInUseError";
 import UsernameAlredyInUse from "@/errors/signup/UsernameAlredyInUseError";
-import { type User, type FormUserFields } from "@/types";
+import { type User } from "@/types";
 
-const registerUser = async (userData: FormUserFields) => {
+const registerUser = async (userData: FormData) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register/`,
       {
         method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: userData,
       }
     );
 

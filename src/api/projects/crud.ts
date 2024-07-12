@@ -22,7 +22,7 @@ export const createProject = async ({
   projectData,
   userId,
 }: {
-  projectData: FormProjectFields;
+  projectData: FormData;
   userId: User["id"];
 }) => {
   try {
@@ -30,10 +30,7 @@ export const createProject = async ({
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/project`,
       {
         method: "POST",
-        body: JSON.stringify(projectData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: projectData,
       }
     );
 
@@ -51,19 +48,16 @@ export const editProject = async ({
   userId,
   projectId,
 }: {
-  projectData: FormProjectFields;
+  projectData: FormData;
   userId: User["id"];
   projectId: Project["id"];
 }) => {
   try {
     const res: Response = await fetch(
-      `${process.env.BACKEND_URL_PROJECTS}/user/${userId}/project/${projectId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/project/${projectId}`,
       {
         method: "PUT",
-        body: JSON.stringify(projectData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: projectData,
       }
     );
 
@@ -79,25 +73,22 @@ export const editProject = async ({
 export const deleteProject = async ({
   userId,
   projectId,
-  projectData,
 }: {
   userId: User["id"];
   projectId: Project["id"];
-  projectData: FormProjectFields;
 }) => {
   try {
     const res: Response = await fetch(
-      `${process.env.BACKEND_URL_PROJECTS}/user/${userId}/project/${projectId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/project/${projectId}`,
       {
         method: "DELETE",
-        body: JSON.stringify(projectData),
         headers: {
           "Content-Type": "application/json",
         },
       }
     );
 
-    if (!res.ok) throw new Error("");
+    if (!res.ok) throw new Error();
     const data: Project = await res.json();
     return data;
   } catch (e) {

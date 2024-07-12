@@ -6,7 +6,6 @@ class InvalidFieldsUserRegisterError extends Error {
     this.status = 400;
     this.message = "The fields can't be null.";
     this.name = "InvalidFieldsUserRegisterError";
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 

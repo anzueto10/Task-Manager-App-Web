@@ -5,7 +5,6 @@ class UsernameAlredyInUse extends Error {
     this.message = "The username is already in use.";
     this.status = 400;
     this.name = "UsernameAlredyInUse";
-    Error.captureStackTrace(this, this.constructor);
   }
 }
 

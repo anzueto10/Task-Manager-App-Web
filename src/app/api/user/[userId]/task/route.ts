@@ -4,21 +4,22 @@ import { type FormTaskFields, type Project, type User } from "@/types";
 import type { TaskTag, Task } from "@prisma/client";
 import cloudinary from "@/libs/cloudinary";
 import { UploadApiResponse } from "cloudinary/types";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 interface Params {
   params: {
     userId: User["id"];
-    projectId: Project["id"];
   };
 }
 
-export const GET = async (req: Request, { params }: Params) => {
-  const { userId, projectId } = params;
+export const GET = async (req: NextRequest, { params }: Params) => {
+  const { userId } = params;
 
   try {
     const tasks = await prisma.task.findMany({
       where: {
-        projectId: projectId,
+        userId,
       },
     });
 
@@ -38,14 +39,17 @@ export const GET = async (req: Request, { params }: Params) => {
 
 export const POST = async (req: NextRequest, { params }: Params) => {
   try {
-    const { userId, projectId } = params;
+    const { userId } = params;
 
     const formData = await req.formData();
+    const projectId = formData.get("projectId") as Project["id"];
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
     const status = formData.get("status") as string;
     const imageFile = formData.get("image") as File | null;
     const tagsString = formData.get("tags") as string | null;
+
+    if (!projectId) throw new Error("No project id");
 
     let tags: Array<TaskTag> = [];
     if (tagsString) {
@@ -62,7 +66,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
 
       imageResponse = await new Promise((resolve, reject) => {
         cloudinary.uploader
-          .upload_stream({}, (error, result) => {
+          .upload_stream(uploadOptions, (error, result) => {
             if (error) {
               reject(error);
             } else {
@@ -93,9 +97,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
       });
     }
 
-    return NextResponse.json({
-      newTask,
-    });
+    return NextResponse.json(newTask);
   } catch (e: any) {
     return NextResponse.json(
       {

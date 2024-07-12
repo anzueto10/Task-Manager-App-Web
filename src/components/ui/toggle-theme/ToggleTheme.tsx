@@ -1,7 +1,7 @@
 "use client";
 import useToggleTheme from "@/hooks/useToggleTheme";
-import SoonIcon from "./icons/SoonIcon";
-import MoonIcon from "./icons/MoonIcon";
+import SoonIcon from "@/components/ui/icons/SoonIcon";
+import MoonIcon from "@/components/ui/icons/MoonIcon";
 
 const ToggleTheme = () => {
   const { toggleTheme, darkMode } = useToggleTheme();

@@ -7,7 +7,8 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button/Button";
+
 import { Fragment } from "react";
 
 interface Props {

@@ -1,7 +1,8 @@
 "use client";
-import FormModal from "@/components/ui/FormModal";
+import FormModal from "@/components/ui/modal/FormModal";
 import AddIcon from "@/components/ui/icons/AddIcon";
 import { VariableTypesButton } from "@/types";
+import CreateTask from "@/components/tasks/forms/CreateTask";
 
 interface DefaultFABProps {
   Icon?: React.FC;
@@ -46,20 +47,7 @@ const FAB: React.FC<Props> = ({
   buttonActionText,
   buttonCancelText,
 }) => {
-  return (
-    <div className="top-10 right-16 fixed">
-      <FormModal
-        modalFormName="ModalCreateTaskForm"
-        Form={ModalForm}
-        buttonActionText={buttonActionText}
-        buttonCancelText={buttonCancelText}
-        modalDescription={modalDescription}
-        modalTitle={modalTitle}
-        ModalIcon={AddIcon}
-        buttonText={text}
-      />
-    </div>
-  );
+  return <p>hola mundo</p>;
 };
 
 export default FAB;

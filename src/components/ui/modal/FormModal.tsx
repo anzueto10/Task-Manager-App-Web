@@ -5,11 +5,17 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/button/Button";
 import { useId, useState } from "react";
-import type { ModalDefaultProps } from "@/types";
+import type { FormModalDefaultProps } from "@/types";
+import DeleteIcon from "@/components/ui/icons/DeleteIcon";
+import { Modal } from "@/components/ui/modal/Modal";
 
-const FormModal: React.FC<ModalDefaultProps> = ({
+interface Props extends FormModalDefaultProps {
+  deleteAction?: () => void;
+}
+
+const FormModal: React.FC<Props> = ({
   buttonText,
   Form,
   positionButton,
@@ -22,9 +28,15 @@ const FormModal: React.FC<ModalDefaultProps> = ({
   ModalIcon,
   modalFormName,
   openButtonRounded,
+  deleteIcon,
+  typeOfForm,
+  deleteAction,
 }) => {
   const [open, setOpen] = useState(false);
   const formId = useId();
+
+  const [confirmationDeleteOpen, setConfirmationDeleteOpen] = useState(false);
+
   return (
     <>
       <Button
@@ -65,6 +77,7 @@ const FormModal: React.FC<ModalDefaultProps> = ({
                   variable="close"
                   onClick={() => setOpen(false)}
                   position="right"
+                  type="button"
                 />
               </DialogTitle>
 
@@ -80,14 +93,46 @@ const FormModal: React.FC<ModalDefaultProps> = ({
                   {buttonActionText}
                 </Button>
 
-                <Button variable="outline" onClick={() => setOpen(false)}>
+                <Button
+                  variable="outline"
+                  onClick={() => setOpen(false)}
+                  type="button"
+                >
                   {buttonCancelText}
                 </Button>
+
+                {deleteIcon && (
+                  <Button
+                    variable="outline"
+                    rounded="full"
+                    position="left"
+                    onClick={() => setConfirmationDeleteOpen(true)}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                )}
               </footer>
             </DialogPanel>
           </div>
         </div>
       </Dialog>
+
+      {deleteIcon && (
+        <Modal
+          buttonAction={deleteAction}
+          open={confirmationDeleteOpen}
+          setOpen={setConfirmationDeleteOpen}
+          buttonActionText="Yes, Delete"
+          buttonCancelText="Cancel"
+          modalTitle={`${
+            typeOfForm === "project"
+              ? "Delete this project?"
+              : typeOfForm === "task" && "Delete this Task?"
+          }`}
+          modalDescription="Are you sure for delete this?"
+          deleteModal
+        />
+      )}
     </>
   );
 };

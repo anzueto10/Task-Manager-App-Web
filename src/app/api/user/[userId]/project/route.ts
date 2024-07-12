@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/libs/prisma";
 import { FormProjectFields, Project, type User } from "@/types";
 import InvalidFields from "@/errors/InvalidFields";
@@ -8,16 +8,17 @@ import {
   PrismaClientValidationError,
 } from "@prisma/client/runtime/library";
 import { getServerSession } from "next-auth";
-import { NextApiRequest, NextApiResponse } from "next";
+import cloudinary from "@/libs/cloudinary";
 
-interface Params {
+interface ProjectParams {
   params: {
     userId: User["id"];
   };
 }
 
-export const GET = async (req: NextApiRequest, { params }: Params) => {
+export const GET = async (req: NextRequest, { params }: ProjectParams) => {
   const { userId } = params;
+
   try {
     const projects = await prisma.project.findMany({
       where: {
@@ -40,31 +41,29 @@ export const GET = async (req: NextApiRequest, { params }: Params) => {
   }
 };
 
-export const POST = async (req: Request) => {
-  const data: FormProjectFields = await req.json();
-  const { description, title } = data;
-  const session = await getServerSession();
+export const POST = async (req: NextRequest, { params }: ProjectParams) => {
+  const formData = await req.formData();
+  const title = formData.get("title") as Project["title"];
+  const description = formData.get("description") as Project["description"];
+
+  const { userId } = params;
 
   try {
-    if (!session) throw new Error("Plis login");
-    const user = await prisma.user.findUnique({
-      where: {
-        email: session.user.email as string,
-      },
-    });
     if (!description || !title) throw new InvalidFields();
 
-    if (user) {
-      const newProject = await prisma.project.create({
-        data: {
-          title,
-          description,
-          userId: user.id,
-        },
-      });
+    const newProject = await prisma.project.create({
+      data: {
+        title,
+        description,
+        userId,
+      },
+    });
 
-      return NextResponse.json(newProject);
-    } else throw new Error("user do not exists");
+    await cloudinary.api.create_folder(
+      `users/${userId}/projects/${newProject.id}`
+    );
+
+    return NextResponse.json(newProject);
   } catch (e) {
     if (e instanceof InvalidFields) {
       return NextResponse.json(

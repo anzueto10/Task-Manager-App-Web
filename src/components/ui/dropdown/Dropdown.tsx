@@ -3,8 +3,8 @@ import { forwardRef } from "react";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
-import ToggleTheme from "./ToggleTheme";
-import Button from "./Button";
+import ToggleTheme from "@/components/ui/toggle-theme/ToggleTheme";
+import Button from "@/components/ui/button/Button";
 import {
   DropdownOption,
   RoundedTypesButton,

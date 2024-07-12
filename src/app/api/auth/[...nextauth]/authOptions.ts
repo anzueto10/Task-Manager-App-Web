@@ -34,10 +34,10 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
       profile(profile) {
         return {
-          id: profile.sub,
-          name: `${profile.given_name} ${profile.family_name}`,
+          id: profile.id,
+          name: profile.name,
           email: profile.email,
-          image: profile.picture,
+          image: profile.picture.data.url,
         };
       },
     }),
@@ -108,16 +108,27 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXT_AUTH_SECRET,
   callbacks: {
     async signIn({ user, account, email }) {
-      return true;
+      if (user) return true;
+      if (account) return true;
+      if (email) return true;
+      return false;
     },
     async session({ session, token }) {
-      if (session) session.user = token as any;
+      if (token) {
+        session.user.id = token.id as any;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
+      }
       return session;
     },
 
     async jwt({ user, token }) {
       if (user) {
         token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.picture = user.image;
       }
       return token;
     },

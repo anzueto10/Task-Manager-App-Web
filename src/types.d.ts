@@ -1,6 +1,7 @@
 import { ICON_SIZES, STATUS_TEXTS, STATUS_TEXTS_CLIENT } from "@/consts";
 import { SvgIconProps } from "@mui/material";
 import { Session } from "next-auth";
+import { MouseEvent } from "react";
 
 export type Status = (typeof STATUS_TEXTS)[keyof typeof STATUS_TEXTS];
 
@@ -33,7 +34,7 @@ export interface Task {
   status: StatusValue;
   tags?: Array<string>;
   createdAt: string;
-  project: string;
+  projectId: Project["id"];
 }
 
 export interface FormTaskFields {
@@ -134,11 +135,13 @@ export interface ModalFormDefaultProps<T> {
 }
 
 export interface ProjectFormProps {
+  projectId?: Project["id"];
   projectTitle?: string;
   projectDescription?: string;
 }
 
 export interface TaskFormProps {
+  taskId?: Task["id"];
   taskTitle?: string;
   taskDescription?: string;
   taskTags?: Array<TaskTag>;
@@ -149,17 +152,29 @@ export interface TaskFormProps {
 type ExcludeClose<T> = T extends "close" ? never : T;
 
 export type VariableTypesButtonExcludeClose = ExcludeClose<VariableTypesButton>;
+
 export interface ModalDefaultProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
   openButtonRounded?: RoundedTypesButton;
-  modalFormName: string;
   openButtonVariable?: VariableTypesButtonExcludeClose;
   buttonActionText: string;
   buttonCancelText: string;
   buttonText?: string;
-  Form: React.FC<ModalFormDefaultProps<ProjectFormProps | TaskFormProps>>;
   positionButton?: PositionTypesButton;
   modalTitle?: string;
   modalDescription?: string;
-  formProps?: TaskFormProps | ProjectFormProps;
   ModalIcon?: React.FC;
+  deleteModal?: boolean;
+  buttonAction?: () => void;
+}
+
+export interface FormModalDefaultProps extends ModalDefaultProps {
+  open?: never;
+  setOpen?: never;
+  modalFormName: string;
+  Form: React.FC<ModalFormDefaultProps<ProjectFormProps | TaskFormProps>>;
+  formProps?: TaskFormProps | ProjectFormProps;
+  deleteIcon?: boolean;
+  typeOfForm: "task" | "project";
 }

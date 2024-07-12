@@ -1,16 +1,36 @@
-import { Task } from "@/types";
-import TagContainer from "@/components/tasks/tags/TagContainer";
+import { Task, TaskTag, User } from "@/types";
 import Image from "next/image";
 import { formatDateDistance } from "@/utils/dateUtils";
+import Button from "@/components/ui/button/Button";
+import FormModal from "@/components/ui/modal/FormModal";
+import EditTask from "../forms/EditTask";
+import { deleteTask } from "@/api/tasks/crud";
+import { useSession } from "next-auth/react";
+import { useRemoveTask } from "@/store/actions";
 
 interface Props {
   task: Task;
 }
 
 const TaskCard: React.FC<Props> = ({ task }) => {
-  const { description, image, tags, createdAt, title, status } = task;
+  const { data: session } = useSession();
+
+  const { description, image, tags, createdAt, title, status, id } = task;
 
   const formattedDate = formatDateDistance(createdAt);
+  const deleteStateTask = useRemoveTask();
+
+  const handdleDeleteTask = async () => {
+    try {
+      await deleteTask({
+        userId: session?.user.id as User["id"],
+        taskId: id,
+      });
+      deleteStateTask(id);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <li className="mt-2 ring-offset-background-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 py-4 dark:ring-offset-background-dark rounded-lg border border-border-light bg-card-light text-foreground-light shadow-sm p-4 dark:text-primary-dark dark:bg-card-dark dark:border-border-dark">
@@ -25,17 +45,34 @@ const TaskCard: React.FC<Props> = ({ task }) => {
           <span className="text-mutedForeground-light dark:text-mutedForeground-dark">
             Date: {formattedDate}
           </span>
-          <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background-light border-input-light bg-background-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent-light hover:text-accentForeground-light h-9 rounded-md px-3 dark:ring-offset-background-dark dark:border-input-dark dark:hover:bg-accent-dark dark:hover:text-accentForeground-dark dark:bg-background-dark">
-            {status}
-          </button>
-          <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background-light border-input-light bg-background-light transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent-light hover:text-accentForeground-light h-9 rounded-md px-3 dark:ring-offset-background-dark dark:border-input-dark dark:hover:bg-accent-dark dark:hover:text-accentForeground-dark dark:bg-background-dark">
-            Edit
-          </button>
+          <Button variable="outline">{status}</Button>
+          <FormModal
+            Form={EditTask}
+            buttonActionText="Save Task"
+            buttonCancelText="Cancel"
+            modalFormName="ModalTaskEdit"
+            typeOfForm="task"
+            buttonText="Edit"
+            openButtonVariable="outline"
+            modalTitle="Edit task"
+            modalDescription="Change the actual values to edit this task."
+            formProps={{
+              taskId: id,
+              taskTitle: title,
+              taskDescription: description,
+              taskImage: image,
+              taskStatus: status,
+              taskTags: tags as unknown as Array<TaskTag>,
+            }}
+            deleteIcon
+            deleteAction={handdleDeleteTask}
+          />
         </main>
       </section>
       {image && (
         <section className="mt-4">
           <Image
+            priority={false}
             src={image}
             alt={title}
             width="300"

@@ -5,7 +5,7 @@ import SettingsIcon from "@/components/ui/icons/SettingsIcon";
 import NotificationsIcon from "@/components/ui/icons/NotificationsIcon";
 import HelpIcon from "@/components/ui/icons/HelpIcon";
 import UserIcon from "@/components/ui/icons/UserIcon";
-import LogoutIcon from "./components/ui/icons/LogoutIcon";
+import { PaymentPlan } from "./types";
 
 export const USER_FIELDS = {
   USERNAME: "username",
@@ -143,6 +143,121 @@ export const DROPDOWN_USER_OPTIONS = {
     Icon: HelpIcon,
   },
 };
+
+export const HOME_NAVBAR_OPTIONS = {
+  FEATURES: {
+    text: "Features",
+    href: "/features/",
+  },
+  PRICING: {
+    text: "Pricing",
+    href: "/pricing/",
+  },
+  ABOUT: {
+    text: "About",
+    href: "/about/",
+  },
+  CONTACT: {
+    text: "Contact",
+    href: "/contact/",
+  },
+};
+
+export const HOME_PAGE_TEXTS = {
+  MAIN_SUBTITLE:
+    "Tasker is a powerful task management app that helps you stay organized and productive. Manage projects, track tasks, and collaborate with your team.",
+  MAIN_TITLE: "Streamline Your Workflow with Tasker",
+};
+
+export const TESTIMONIALS = {
+  SARAH_MILLER: {
+    name: "Sarah Miller",
+    ocupation: "Team Lead",
+    message:
+      "Tasker has made our team more efficient and collaborative. It's a must-have tool for any organization.",
+  },
+  JOHN_DOE: {
+    name: "John Doe",
+    ocupation: "Project Manager",
+    message:
+      "Tasker has been a game-changer for our team. It's helped us stay organized and on top of our projects.",
+  },
+};
+
+export const KEY_FEATURES = {
+  PROJECT_MANAGMENT: {
+    title: "Project Management",
+    description:
+      "Organize your projects and tasks with ease. Tasker provides a clear overview of your team's progress and deadlines.",
+  },
+  TASK_TRACKING: {
+    title: "Task Tracking",
+    description:
+      "Keep track of your team's tasks and deadlines. Tasker helps you stay on top of your work and ensure nothing falls through the cracks.",
+  },
+  COLLABORATION: {
+    title: "Collaboration",
+    description:
+      "Collaborate with your team seamlessly. Tasker allows you to share tasks, comment on progress, and stay in sync.",
+  },
+};
+export const PAYMENT_PERIOD_OPTIONS = {
+  MONTH: "month",
+  USER: "user",
+  YEAR: "year",
+} as const;
+
+export const PAYMENT_PLANS: { [key: string]: PaymentPlan } = {
+  FREE: {
+    name: "Free",
+    CTA: {
+      text: "Sign Up",
+      url: "/signup/",
+    },
+    description: "Get started with Tasker for free.",
+    price: 0.0,
+    period: [PAYMENT_PERIOD_OPTIONS.MONTH],
+    features: [
+      { text: "1 active project", avaible: true },
+      { text: "5 team members", avaible: true },
+      { text: "Basic task management", avaible: true },
+      { text: "No advanced features", avaible: false },
+    ],
+  },
+  PRO: {
+    name: "Pro",
+    CTA: {
+      text: "Start Free Trial",
+      url: "/pay/",
+    },
+    description: "Unlock advanced features for your team.",
+    price: 9.0,
+    period: [PAYMENT_PERIOD_OPTIONS.MONTH, PAYMENT_PERIOD_OPTIONS.USER],
+    features: [
+      { text: "Unlimited active projects", avaible: true },
+      { text: "Unlimited team members", avaible: true },
+      { text: "Advanced task management", avaible: true },
+      { text: "Project dashboards and reporting", avaible: true },
+    ],
+  },
+  ENTER_PRICE: {
+    name: "Enterprise",
+    CTA: {
+      text: "Contact Us",
+      url: "/contact/",
+    },
+    description: "Custom solutions for large teams and organizations.",
+    price: "Contact Us",
+    period: [],
+    features: [
+      { text: "Unlimited active projects", avaible: true },
+      { text: "Unlimited team members", avaible: true },
+      { text: "Advanced task management", avaible: true },
+      { text: "Project dashboards and reporting", avaible: true },
+      { text: "Custom integrations and features", avaible: true },
+    ],
+  },
+} as const;
 
 //Clases
 

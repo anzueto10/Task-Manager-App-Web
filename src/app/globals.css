@@ -7,6 +7,7 @@
         @apply border-border-light dark:border-border-dark text-foreground-light dark:text-foreground-dark;
     }
 
+
     body {
         @apply bg-background-light dark:bg-background-dark;
         @apply font-body

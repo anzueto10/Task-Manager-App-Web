@@ -1,4 +1,9 @@
-import { ICON_SIZES, STATUS_TEXTS, STATUS_TEXTS_CLIENT } from "@/consts";
+import {
+  ICON_SIZES,
+  PAYMENT_PERIOD_OPTIONS,
+  STATUS_TEXTS,
+  STATUS_TEXTS_CLIENT,
+} from "@/consts";
 import { SvgIconProps } from "@mui/material";
 import { Session } from "next-auth";
 import { MouseEvent } from "react";
@@ -177,4 +182,33 @@ export interface FormModalDefaultProps extends ModalDefaultProps {
   formProps?: TaskFormProps | ProjectFormProps;
   deleteIcon?: boolean;
   typeOfForm: "task" | "project";
+}
+
+export interface Testimonial {
+  name: string;
+  ocupation: string;
+  message: string;
+}
+
+export interface KeyFeature {
+  title: string;
+  description: string;
+}
+export interface PaymentPlanFeature {
+  avaible: boolean;
+  text: string;
+}
+
+export type PaymentPeriodTypes =
+  (typeof PAYMENT_PERIOD_OPTIONS)[keyof typeof PAYMENT_PERIOD_OPTIONS];
+
+export type PaymentPeriodOptions = PaymentPeriodTypes | null;
+
+export interface PaymentPlan {
+  CTA: { text: string; url: string };
+  name: string;
+  description: string;
+  price: number | "Contact Us";
+  period: Array<PaymentPeriodOptions>;
+  features: Array<PaymentPlanFeature>;
 }

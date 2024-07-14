@@ -21,7 +21,12 @@ const RootLayout = async ({
   return (
     <html>
       <body
-        className={cn("antialiased", fontHeading.variable, fontBody.variable)}
+        className={cn(
+          "antialiased",
+          fontHeading.variable,
+          fontBody.variable,
+          "flex flex-col min-h-dvh"
+        )}
       >
         <Providers session={session}>{children}</Providers>
       </body>

@@ -10,6 +10,7 @@ import CloseIcon from "@/components/ui/icons/CloseIcon";
 
 interface BaseProps {
   as?: any;
+  size?: "large" | "medium" | "small" | "xlarge";
   onClick?: () => void;
   variable?: VariableTypesButton;
   rounded?: RoundedTypesButton;
@@ -47,11 +48,12 @@ const Button: React.ForwardRefExoticComponent<
       onClick,
       variable = "default",
       position,
-      rounded,
+      rounded = "md",
       type = "button",
       forForm,
       as: As,
       color = "default",
+      size = "medium",
       ...props
     },
     ref
@@ -63,6 +65,7 @@ const Button: React.ForwardRefExoticComponent<
             type={type}
             ref={ref}
             className={`inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer
+            
               ${
                 color === "danger"
                   ? `${
@@ -101,16 +104,38 @@ const Button: React.ForwardRefExoticComponent<
                           "border-none outline-none bg-foreground-light text-primaryForeground-light hover:bg-primary-light/90 dark:bg-foreground-dark dark:text-primaryForeground-dark dark:hover:bg-primary-dark/90"
                     }`
               }
+
+              ${
+                position === "right"
+                  ? "ml-auto"
+                  : position === "left"
+                  ? "mr-auto"
+                  : position === "top"
+                  ? "mb-auto"
+                  : position === "bottom" && "mt-auto"
+              }
         
-          ${rounded === "full" ? "rounded-full p-3" : "rounded-md px-3 py-2"} ${
-              position === "right"
-                ? "ml-auto"
-                : position === "left"
-                ? "mr-auto"
-                : position === "top"
-                ? "mb-auto"
-                : position === "bottom" && "mt-auto"
-            } `}
+              ${
+                rounded === "full"
+                  ? `rounded-full ${
+                      size === "xlarge"
+                        ? "p-7"
+                        : size === "large"
+                        ? "p-5"
+                        : size === "medium"
+                        ? "p-3"
+                        : size === "small" && "p-1"
+                    }`
+                  : `${
+                      size === "xlarge"
+                        ? "px-7 py-6"
+                        : size === "large"
+                        ? "px-5 py-4"
+                        : size === "medium"
+                        ? "px-3 py-2"
+                        : size === "small" && "px-1 py-0.5"
+                    }`
+              }`}
             onClick={onClick}
             form={forForm}
             {...props}
@@ -160,15 +185,34 @@ const Button: React.ForwardRefExoticComponent<
                   }`
             }
       
-        ${rounded === "full" ? "rounded-full p-3" : "rounded-md px-3 py-2"} ${
-              position === "right"
-                ? "ml-auto"
-                : position === "left"
-                ? "mr-auto"
-                : position === "top"
-                ? "mb-auto"
-                : position === "bottom" && "mt-auto"
-            } `}
+       ${
+         position === "right"
+           ? "ml-auto"
+           : position === "left"
+           ? "mr-auto"
+           : position === "top"
+           ? "mb-auto"
+           : position === "bottom" && "mt-auto"
+       }
+      ${
+        rounded === "full"
+          ? "rounded-full"
+          : rounded === "lg"
+          ? "rounded-lg"
+          : rounded === "md"
+          ? "rounded-md"
+          : rounded === "sm" && "rounded-sm"
+      }
+              ${
+                size === "xlarge"
+                  ? "px-8 py-3"
+                  : size === "large"
+                  ? "px-6 py-3"
+                  : size === "medium"
+                  ? "px-4 py-2"
+                  : size === "small" && "px-1 py-0.5"
+              }
+              `}
             onClick={onClick}
             form={forForm}
             type={type}

@@ -3,7 +3,11 @@ import useToggleTheme from "@/hooks/useToggleTheme";
 import SoonIcon from "@/components/ui/icons/SoonIcon";
 import MoonIcon from "@/components/ui/icons/MoonIcon";
 
-const ToggleTheme = () => {
+interface Props {
+  onlyIcons?: boolean;
+}
+
+const ToggleTheme: React.FC<Props> = ({ onlyIcons }) => {
   const { toggleTheme, darkMode } = useToggleTheme();
 
   return (
@@ -14,11 +18,12 @@ const ToggleTheme = () => {
       {darkMode ? (
         <>
           <SoonIcon />
-          <span className="ml-1">Light Mode</span>
+          {!onlyIcons && <span className="ml-1">Light Mode</span>}
         </>
       ) : (
         <>
-          <MoonIcon /> <span className="ml-1">Dark Mode</span>
+          <MoonIcon />
+          {!onlyIcons && <span className="ml-1">Dark Mode</span>}
         </>
       )}
     </button>

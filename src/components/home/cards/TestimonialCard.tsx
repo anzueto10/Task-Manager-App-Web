@@ -1,4 +1,4 @@
-import PersonAvatar from "@/components/ui/avatar/PersonAvatar";
+import UserIcon from "@/components/ui/icons/UserIcon";
 import type { Testimonial } from "@/types";
 
 interface Props {
@@ -10,7 +10,9 @@ const TestimonialCard: React.FC<Props> = ({ testimonial }) => {
     <li>
       <div className="flex flex-col justify-center space-y-4 bg-background-light dark:bg-background-dark p-6 rounded-lg shadow-sm">
         <div className="flex items-start gap-4">
-          <PersonAvatar />
+          <span className="spect-square h-10 w-10 shrink-0 overflow-hidden rounded-full flex items-center justify-center">
+            <UserIcon />
+          </span>
           <div className="grid gap-1">
             <div className="flex items-center gap-2">
               <h5 className="font-bold">{testimonial.name}</h5>

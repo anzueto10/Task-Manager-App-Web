@@ -1,10 +1,10 @@
 import KeyFeaturesContainer from "@/components/home/containers/KeyFeaturesContainer";
-import MainSectionContainer from "@/components/home/containers/MainSectionContainer";
+import MainSectionContainer from "@/components/ui/containers/MainSectionContainer";
 import TestimonialsContainer from "@/components/home/containers/TestimonialsContainer";
 import SendMail from "@/components/home/forms/SendMail";
 import MainNavBar from "@/components/ui/navbars/NavBar";
 import MainFooter from "@/components/ui/footers/MainFooter";
-import { HOME_PAGE_TEXTS } from "@/consts";
+import { HOME_PAGE_TEXTS, KEY_FEATURES } from "@/consts";
 import Image from "next/image";
 import Link from "next/link";
 import TryAndLearnButtons from "@/components/ui/button/TryAndLearnButtons";
@@ -67,7 +67,14 @@ const HomePage: React.FC = () => {
               alt="Project Management"
               className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
             />
-            <KeyFeaturesContainer />
+            <KeyFeaturesContainer
+              keyFeatures={Object.entries(KEY_FEATURES.HOME_FEATURES).map(
+                ([key, value]) => ({
+                  description: value.description,
+                  title: value.title,
+                })
+              )}
+            />
           </article>
         </MainSectionContainer>
         <MainSectionContainer grid gridCols={2}>

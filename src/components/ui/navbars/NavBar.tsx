@@ -1,3 +1,4 @@
+"use client";
 import { HOME_NAVBAR_OPTIONS } from "@/consts";
 import {
   Disclosure,
@@ -14,8 +15,10 @@ import Link from "next/link";
 import Button from "../button/Button";
 import ToggleTheme from "../toggle-theme/ToggleTheme";
 import TryAndLearnButtons from "../button/TryAndLearnButtons";
-
+import { usePathname } from "next/navigation";
 const MainNavBar: React.FC = () => {
+  const currenPath = usePathname();
+  console.log(currenPath);
   return (
     <Disclosure
       as="nav"
@@ -23,7 +26,6 @@ const MainNavBar: React.FC = () => {
     >
       <div className="relative flex h-16 items-center justify-between px-2 sm:px-6 lg:px-8">
         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          {/* Mobile menu button*/}
           <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <span className="absolute -inset-0.5" />
             <span className="sr-only">Open main menu</span>
@@ -57,7 +59,9 @@ const MainNavBar: React.FC = () => {
                   key={key}
                   href={value.href}
                   aria-current={value.href ? "page" : undefined}
-                  className="text-sm hover:underline underline-offset-4 font-medium"
+                  className={`text-sm underline-offset-4 font-medium ${
+                    currenPath === value.href ? "underline" : "hover:underline"
+                  }`}
                 >
                   {value.text}
                 </Link>
@@ -75,10 +79,9 @@ const MainNavBar: React.FC = () => {
               key={key}
               as={Link}
               href={value.href}
-              aria-current={value.href ? "page" : undefined}
-              className={
-                "text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-              }
+              className={`text-sm underline-offset-4 font-medium ${
+                currenPath === value.href ? "underline" : "hover:underline"
+              }`}
             >
               {value.text}
             </DisclosureButton>

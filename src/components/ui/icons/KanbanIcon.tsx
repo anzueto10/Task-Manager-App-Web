@@ -2,11 +2,11 @@
 
 import { IconProps } from "@/types";
 
-const CheckIcon: React.FC<IconProps> = ({
-  width,
+const KanbanIcon: React.FC<IconProps> = ({
+  className,
   height,
-  className = "w-full h-full",
-  stroke = 2,
+  stroke,
+  width,
 }) => {
   return (
     <svg
@@ -15,17 +15,15 @@ const CheckIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       strokeWidth={stroke}
       stroke="currentColor"
+      className={` ${className} w-full h-full`}
       width={width}
       height={height}
-      className={className}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m4.5 12.75 6 6 9-13.5"
-      />
+      <path d="M6 5v11"></path>
+      <path d="M12 5v6"></path>
+      <path d="M18 5v14"></path>
     </svg>
   );
 };
 
-export default CheckIcon;
+export default KanbanIcon;

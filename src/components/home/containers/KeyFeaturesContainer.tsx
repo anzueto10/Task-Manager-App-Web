@@ -1,10 +1,14 @@
-import { KEY_FEATURES } from "@/consts";
 import KeyFeatureCard from "@/components/home/cards/KeyFeatureCard";
+import { KeyFeature } from "@/types";
 
-const KeyFeaturesContainer = () => {
+interface Props {
+  keyFeatures: Array<KeyFeature>;
+}
+
+const KeyFeaturesContainer: React.FC<Props> = ({ keyFeatures }) => {
   return (
     <ul className="flex flex-col justify-center space-y-4">
-      {Object.entries(KEY_FEATURES).map(([key, value]) => (
+      {keyFeatures.map((value, key) => (
         <KeyFeatureCard keyFeature={value} />
       ))}
     </ul>

@@ -5,7 +5,13 @@ import SettingsIcon from "@/components/ui/icons/SettingsIcon";
 import NotificationsIcon from "@/components/ui/icons/NotificationsIcon";
 import HelpIcon from "@/components/ui/icons/HelpIcon";
 import UserIcon from "@/components/ui/icons/UserIcon";
-import { PaymentPlan } from "./types";
+import { IconKeyFeature, KeyFeature, PaymentPlan } from "./types";
+import CalendarIcon from "./components/ui/icons/CalendarIcon";
+import KanbanIcon from "./components/ui/icons/KanbanIcon";
+import CheckIcon from "./components/ui/icons/CheckIcon";
+import CombineIcon from "./components/ui/icons/CombineIcon";
+import UserCircleIcon from "./components/ui/icons/UserCircleIcon";
+import AIIcon from "./components/ui/icons/AIIcon";
 
 export const USER_FIELDS = {
   USERNAME: "username",
@@ -124,42 +130,46 @@ export const LOGIN_FORM_DESCRIPTION =
 export const DROPDOWN_USER_OPTIONS = {
   ACCOUNT: {
     text: "Account",
-    href: "/account/",
+    href: "/account",
     Icon: UserIcon,
   },
   SETTINGS: {
     text: "Settings",
-    href: "/settings/",
+    href: "/settings",
     Icon: SettingsIcon,
   },
   NOTIFICATIONS: {
     text: "Notifications",
-    href: "/notifications/",
+    href: "/notifications",
     Icon: NotificationsIcon,
   },
   HELP: {
     text: "Help",
-    href: "/help/",
+    href: "/help",
     Icon: HelpIcon,
   },
 };
 
 export const HOME_NAVBAR_OPTIONS = {
+  HOME: {
+    text: "Home",
+    href: "/",
+  },
   FEATURES: {
     text: "Features",
-    href: "/features/",
+    href: "/features",
   },
   PRICING: {
     text: "Pricing",
-    href: "/pricing/",
+    href: "/pricing",
   },
   ABOUT: {
     text: "About",
-    href: "/about/",
+    href: "/about",
   },
   CONTACT: {
     text: "Contact",
-    href: "/contact/",
+    href: "/contact",
   },
 };
 
@@ -185,22 +195,64 @@ export const TESTIMONIALS = {
 };
 
 export const KEY_FEATURES = {
-  PROJECT_MANAGMENT: {
-    title: "Project Management",
-    description:
-      "Organize your projects and tasks with ease. Tasker provides a clear overview of your team's progress and deadlines.",
+  ICON_FEATURES: {
+    TASK_SCHEDULING: {
+      description:
+        "Easily schedule and manage tasks with our intuitive calendar view.",
+      title: "Task Scheduling",
+      Icon: CalendarIcon,
+    },
+    KANBAN_BOARDS: {
+      title: "Kanban Boards",
+      description:
+        "Visualize your workflow and track progress with our customizable Kanban boards.",
+      Icon: KanbanIcon,
+    },
+    CHECKLIST: {
+      title: "Checklists",
+      description:
+        "Break down tasks into manageable steps with our comprehensive checklists.",
+      Icon: CheckIcon,
+    },
+    TEAM_COLLABORATION: {
+      title: "Team Collaboration",
+      description:
+        "Streamline communication and collaboration with your team members.",
+      Icon: CombineIcon,
+    },
+    INTUITIVE_INTERFACE: {
+      title: "Intuitive Interface",
+      description:
+        "Tasker's user-friendly interface makes it easy to manage your projects, tasks, and team.",
+      Icon: UserCircleIcon,
+    },
+    AI_INTEGRATIONS: {
+      title: "AI-powered Integrations",
+      description:
+        "Enhance productivity with AI-driven integrations that automate tasks and provide intelligent insights.",
+      Icon: AIIcon,
+    },
   },
-  TASK_TRACKING: {
-    title: "Task Tracking",
-    description:
-      "Keep track of your team's tasks and deadlines. Tasker helps you stay on top of your work and ensure nothing falls through the cracks.",
-  },
-  COLLABORATION: {
-    title: "Collaboration",
-    description:
-      "Collaborate with your team seamlessly. Tasker allows you to share tasks, comment on progress, and stay in sync.",
+
+  HOME_FEATURES: {
+    PROJECT_MANAGEMENT: {
+      title: "Project Management",
+      description:
+        "Organize your projects and tasks with ease. Tasker provides a clear overview of your team's progress and deadlines.",
+    },
+    TASK_TRACKING: {
+      title: "Task Tracking",
+      description:
+        "Keep track of your team's tasks and deadlines. Tasker helps you stay on top of your work and ensure nothing falls through the cracks.",
+    },
+    COLLABORATION: {
+      title: "Collaboration",
+      description:
+        "Collaborate with your team seamlessly. Tasker allows you to share tasks, comment on progress, and stay in sync.",
+    },
   },
 };
+
 export const PAYMENT_PERIOD_OPTIONS = {
   MONTH: "month",
   USER: "user",

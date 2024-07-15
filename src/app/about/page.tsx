@@ -1,8 +1,6 @@
 import TryAndLearnButtons from "@/components/ui/button/TryAndLearnButtons";
 import MainMainContainer from "@/components/ui/containers/MainMainContainer";
 import MainSectionContainer from "@/components/ui/containers/MainSectionContainer";
-import MainFooter from "@/components/ui/footers/MainFooter";
-import MainNavBar from "@/components/ui/navbars/NavBar";
 import Image from "next/image";
 
 const AboutPage = () => {

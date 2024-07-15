@@ -37,7 +37,7 @@ const TaskCard: React.FC<Props> = ({ task }) => {
       <section className="flex items-center justify-between">
         <header>
           <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="text-muted-foreground text-foreground-light dark:text-secondaryForeground-dark">
+          <p className="text-mutedForeground-light dark:text-mutedForeground-dark">
             {description}
           </p>
         </header>

@@ -11,9 +11,11 @@ const PaymentPlanFeatureCard: React.FC<Props> = ({ paymentPlanFeature }) => {
     <li>
       <span className="mr-2 inline-block h-4 w-4">
         {paymentPlanFeature.avaible === true ? (
-          <CheckIcon />
+          <CheckIcon className="text-green-500" />
         ) : (
-          paymentPlanFeature.avaible === false && <XIcon />
+          paymentPlanFeature.avaible === false && (
+            <XIcon className="text-red-500" />
+          )
         )}
       </span>
       <span className="text-mutedForeground-light dark:text-mutedForeground-dark">

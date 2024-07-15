@@ -4,12 +4,12 @@
 
 @layer base {
     * {
-        @apply border-border-light dark:border-border-dark text-foreground-light dark:text-foreground-dark;
+        @apply border-border-light dark:border-border-dark;
     }
 
 
     body {
-        @apply bg-background-light dark:bg-background-dark;
+        @apply bg-background-light dark:bg-background-dark text-foreground-light dark:text-foreground-dark;
         @apply font-body
     }
 

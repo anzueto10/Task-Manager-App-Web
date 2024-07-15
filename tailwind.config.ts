@@ -13,6 +13,8 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
+        md: "840px",
+
         "3xs": "360px",
         "2xs": "414px",
         xs: "480px",

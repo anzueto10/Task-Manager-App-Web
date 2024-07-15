@@ -5,7 +5,7 @@ import SettingsIcon from "@/components/ui/icons/SettingsIcon";
 import NotificationsIcon from "@/components/ui/icons/NotificationsIcon";
 import HelpIcon from "@/components/ui/icons/HelpIcon";
 import UserIcon from "@/components/ui/icons/UserIcon";
-import { IconKeyFeature, KeyFeature, PaymentPlan } from "./types";
+import { IconKeyFeature, KeyFeature, PaymentPlan, Privacy } from "./types";
 import CalendarIcon from "./components/ui/icons/CalendarIcon";
 import KanbanIcon from "./components/ui/icons/KanbanIcon";
 import CheckIcon from "./components/ui/icons/CheckIcon";
@@ -308,6 +308,153 @@ export const PAYMENT_PLANS: { [key: string]: PaymentPlan } = {
       { text: "Project dashboards and reporting", avaible: true },
       { text: "Custom integrations and features", avaible: true },
     ],
+  },
+} as const;
+
+export const TERMS_OF_SERVICE = {
+  USER_MANAGEMENT: {
+    title: "User Accounts",
+    description:
+      "To use Tasker, you'll need to create an account. This account is for your personal use only and cannot be shared. You're responsible for keeping your account secure and for any activity that occurs under your account.",
+  },
+  CONTENT_OWNERSHIP: {
+    title: "Content Ownership",
+    description:
+      "Any content you create or upload to Tasker, such as project details, files, and comments, remains yours. We don't claim ownership of your content, but by using Tasker, you grant us a license to use, copy, and distribute it as necessary to provide the service.",
+  },
+  PRIVACY: {
+    title: "Privacy",
+    description:
+      "We take your privacy seriously. We collect and use your personal information in accordance with our Privacy Policy. Please review the Privacy Policy to understand how we handle your data.",
+  },
+  LIMITATIONS_OF_LIABILITY: {
+    title: "Limitations of Liability",
+    description:
+      "Tasker is provided 'as is' without warranties. We're not liable for any issues or damages that may arise from your use of the service. Our liability is limited to the maximum extent permitted by law.",
+  },
+  DISPUTE_RESOLUTION: {
+    title: "Dispute Resolution",
+    description:
+      "Any disputes arising from these terms or your use of Tasker will be resolved through binding arbitration. You waive your right to a jury trial or to participate in a class action lawsuit.",
+  },
+  CHANGES_TO_THE_TERMS: {
+    title: "Changes to the Terms",
+    description:
+      "We may update these terms from time to time. We'll notify you of any changes, and your continued use of Tasker after the changes will constitute your acceptance of the new terms.",
+  },
+};
+
+export const PRIVACY_SECTIONS: { [key: string]: Privacy } = {
+  TASKER_COLLECT: {
+    title: "What data does Tasker collect?",
+    header: "Tasker collects the following information from users:",
+    list: [
+      {
+        title: "Account Information",
+        description: "Your name, email address, and password.",
+      },
+      {
+        title: "Project and Task Data",
+        description:
+          "The details of the projects and tasks you create, including titles, descriptions, due dates, and attachments.",
+      },
+      {
+        title: "Collaboration Data",
+        description:
+          "The names and email addresses of any team members you invite to collaborate on your projects.",
+      },
+      {
+        title: "Usage Data",
+        description:
+          "Information about how you use the Tasker application, such as the pages you visit, the actions you take, and the time spent on the platform.",
+      },
+    ],
+  },
+  TASKER_USE: {
+    title: "How does Tasker use your data?",
+    header:
+      "Tasker uses your data to provide and improve the Tasker application, including:",
+    list: [
+      {
+        title: "Account Management",
+        description:
+          "To create and manage your Tasker account, and to authenticate your login.",
+      },
+      {
+        title: "Project and Task Management",
+        description:
+          "To allow you to create, organize, and track your projects and tasks.",
+      },
+      {
+        title: "Collaboration",
+        description:
+          "To enable you to invite team members to collaborate on your projects.",
+      },
+      {
+        title: "Improvement and Analytics",
+        description:
+          "To analyze how you use the Tasker application, so that we can continually improve the user experience.",
+      },
+    ],
+  },
+  TASKER_STORE: {
+    title: "How does Tasker store and protect your data?",
+    header: "Tasker takes the following measures to protect your data:",
+    list: [
+      {
+        title: "Encryption",
+        description:
+          "All data is encrypted in transit and at rest using industry-standard encryption protocols.",
+      },
+      {
+        title: "Access Controls",
+        description:
+          "Access to your data is restricted to authorized Tasker employees and contractors who need it to perform their job duties.",
+      },
+      {
+        title: "Backups",
+        description:
+          "Your data is regularly backed up to ensure it can be restored in the event of a system failure or other incident.",
+      },
+      {
+        title: "Security Audits",
+        description:
+          "Tasker undergoes regular security audits to identify and address any vulnerabilities in our systems.",
+      },
+    ],
+  },
+  USER_RIGHTS: {
+    title: "Your Rights as a Tasker User",
+    header: "As a Tasker user, you have the following rights:",
+    list: [
+      {
+        title: "Access",
+        description:
+          "You can access the personal information we hold about you at any time.",
+      },
+      {
+        title: "Correction",
+        description:
+          "You can request that we correct any inaccurate or incomplete information we have about you.",
+      },
+      {
+        title: "Deletion",
+        description:
+          "You can request that we delete your personal information, subject to certain exceptions.",
+      },
+      {
+        title: "Portability",
+        description:
+          "You can request that we provide you with a copy of your personal information in a machine-readable format.",
+      },
+      {
+        title: "Objection",
+        description:
+          "You can object to the processing of your personal information for certain purposes.",
+      },
+    ],
+    footer:
+      "If you have any questions or concerns about your rights, please contact our privacy team at privacy@tasker.com.",
   },
 } as const;
 

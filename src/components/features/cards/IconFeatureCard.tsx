@@ -11,7 +11,9 @@ const IconFeatureCard: React.FC<Props> = ({ feature }) => {
       </span>
 
       <h3 className="text-xl font-bold">{feature.title}</h3>
-      <p className="text-muted-foreground text-center">{feature.description}</p>
+      <p className="text-mutedForeground-light dark:text-mutedForeground-dark text-center">
+        {feature.description}
+      </p>
     </article>
   );
 };

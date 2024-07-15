@@ -223,3 +223,10 @@ export interface IconProps {
 export interface IconKeyFeature extends KeyFeature {
   Icon: React.FC<IconProps>;
 }
+
+export interface Privacy {
+  title: string;
+  header: string;
+  list: Array<{ title: string; description: string }>;
+  footer?: string;
+}

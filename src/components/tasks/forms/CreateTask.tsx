@@ -21,7 +21,7 @@ import type {
 } from "@/types";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useSession } from "next-auth/react";
-import { ChangeEvent, KeyboardEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { mixed, object, string } from "yup";
 

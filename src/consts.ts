@@ -125,7 +125,7 @@ export const ERROR_NAMES = {
 export const LOGIN_FORM_TITLE = "Explore the best way to manage your projects.";
 
 export const LOGIN_FORM_DESCRIPTION =
-  "Millions of designers and agencies around the world showcase their portfolio work on Flowbite - the home to the world’s best design and creative professionals.";
+  "Welcome to Tasker, your ultimate tool for managing projects and tasks efficiently. Log in to access your dashboard, collaborate with your team, and stay on top of your tasks. Let's get things done together!";
 
 export const DROPDOWN_USER_OPTIONS = {
   ACCOUNT: {

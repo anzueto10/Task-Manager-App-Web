@@ -17,6 +17,7 @@ interface BaseProps {
   position?: PositionTypesButton;
   type?: TypeTypesButton;
   color?: "danger" | "success" | "warnig" | "default";
+  full?: boolean;
 }
 
 interface DefaultButtonProps extends BaseProps {
@@ -54,6 +55,7 @@ const Button: React.ForwardRefExoticComponent<
       as: As,
       color = "default",
       size = "medium",
+      full = false,
       ...props
     },
     ref
@@ -65,7 +67,7 @@ const Button: React.ForwardRefExoticComponent<
             type={type}
             ref={ref}
             className={`inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer
-            
+            ${full && "w-full"}
               ${
                 color === "danger"
                   ? `${
@@ -146,6 +148,7 @@ const Button: React.ForwardRefExoticComponent<
           <button
             ref={ref}
             className={`inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:cursor-pointer
+            ${full && "w-full"}
             ${
               color === "danger"
                 ? `${

@@ -84,6 +84,7 @@ export interface ProjectModalsProps extends ModalsProps {
 
 export interface LoginInitialValues {
   emailOrUsername: string;
+  rememberMe: boolean;
   password: string;
 }
 export interface SignupInitialValues {

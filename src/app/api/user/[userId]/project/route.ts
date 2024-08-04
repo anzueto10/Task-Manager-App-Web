@@ -35,7 +35,7 @@ export const GET = async (req: NextRequest, { params }: ProjectParams) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }
@@ -60,7 +60,7 @@ export const POST = async (req: NextRequest, { params }: ProjectParams) => {
     });
 
     await cloudinary.api.create_folder(
-      `users/${userId}/projects/${newProject.id}`
+      `users/${userId}/projects/${newProject.id}`,
     );
 
     return NextResponse.json(newProject);
@@ -72,7 +72,7 @@ export const POST = async (req: NextRequest, { params }: ProjectParams) => {
         },
         {
           status: e.status,
-        }
+        },
       );
     } else if (
       e instanceof PrismaClientKnownRequestError ||
@@ -87,7 +87,7 @@ export const POST = async (req: NextRequest, { params }: ProjectParams) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }

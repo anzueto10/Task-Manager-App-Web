@@ -75,7 +75,7 @@ export const authOptions: AuthOptions = {
 
           const matchedPassword = await bcrypt.compare(
             credentials.password,
-            userFound.password as string
+            userFound.password as string,
           );
 
           if (!matchedPassword) throw new PasswordsDoNotMatchesError();
@@ -93,9 +93,9 @@ export const authOptions: AuthOptions = {
             e instanceof PrismaClientKnownRequestError ||
             e instanceof PrismaClientValidationError ||
             e instanceof PrismaClientInitializationError
-          )
+          ) {
             throw e;
-          else throw new Error("Authorization error");
+          } else throw new Error("Authorization error");
         }
       },
     }),

@@ -18,8 +18,9 @@ export const POST = async (req: NextRequest) => {
   const password = formData.get("password") as FormUserFields["password"];
   const username = formData.get("username") as FormUserFields["username"];
   try {
-    if (!email || !password || !username)
+    if (!email || !password || !username) {
       throw new InvalidFieldsUserRegisterError();
+    }
 
     const emailFound = await prisma.user.findUnique({
       where: {
@@ -29,7 +30,7 @@ export const POST = async (req: NextRequest) => {
 
     const userNameFound = await prisma.user.findUnique({
       where: {
-        username: username,
+        username,
       },
     });
 
@@ -43,7 +44,7 @@ export const POST = async (req: NextRequest) => {
       data: {
         email,
         password: hashedPassword,
-        username: username,
+        username,
       },
     });
 
@@ -60,7 +61,7 @@ export const POST = async (req: NextRequest) => {
         },
         {
           status: e.status,
-        }
+        },
       );
     } else if (e instanceof UsernameAlredyInUse) {
       return NextResponse.json(
@@ -69,7 +70,7 @@ export const POST = async (req: NextRequest) => {
         },
         {
           status: e.status,
-        }
+        },
       );
     } else if (e instanceof EmailAlredyInUseError) {
       return NextResponse.json(
@@ -78,7 +79,7 @@ export const POST = async (req: NextRequest) => {
         },
         {
           status: e.status,
-        }
+        },
       );
     } else if (
       e instanceof PrismaClientKnownRequestError ||
@@ -93,7 +94,7 @@ export const POST = async (req: NextRequest) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }

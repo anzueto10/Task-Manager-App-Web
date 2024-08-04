@@ -63,7 +63,7 @@ const EditTask: React.FC<
       .required("Please, enter a status for the task")
       .oneOf(
         ["backlog", "inProgress", "inReview", "completed"],
-        "Invalid status"
+        "Invalid status",
       ),
     image: mixed()
       .nullable()
@@ -103,7 +103,7 @@ const EditTask: React.FC<
     try {
       if (taskId) {
         const editedTask = await editTask({
-          taskId: taskId,
+          taskId,
           taskData: data,
           userId: session?.user.id as User["id"],
         });
@@ -163,7 +163,7 @@ const EditTask: React.FC<
               <div className="grid grid-cols-4 items-center gap-4">
                 <label
                   htmlFor="description"
-                  className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-base font-medium"
                 >
                   {TASK_FIELDS_TEXTS.DESCRIPTION}
                 </label>
@@ -187,7 +187,7 @@ const EditTask: React.FC<
               <div className="grid grid-cols-4 items-center gap-4">
                 <label
                   htmlFor="status"
-                  className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-base font-medium"
                 >
                   {TASK_FIELDS_TEXTS.STATUS}
                 </label>
@@ -209,7 +209,7 @@ const EditTask: React.FC<
               <div className="grid grid-cols-4 items-center gap-4">
                 <label
                   htmlFor="image"
-                  className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-base font-medium"
                 >
                   {TASK_FIELDS_TEXTS.IMAGE}
                 </label>

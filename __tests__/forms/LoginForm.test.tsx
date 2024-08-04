@@ -10,7 +10,7 @@ const renderLoginPage = async () => {
   render(
     <SessionProviderWrapper session={session}>
       <LoginFormBody />
-    </SessionProviderWrapper>
+    </SessionProviderWrapper>,
   );
 };
 

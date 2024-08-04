@@ -1,6 +1,5 @@
-import CheckIcon from "@/components/ui/icons/CheckIcon";
-import XIcon from "@/components/ui/icons/XIcon";
 import { PaymentPlanFeature } from "@/types";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   paymentPlanFeature: PaymentPlanFeature;
@@ -8,13 +7,13 @@ interface Props {
 
 const PaymentPlanFeatureCard: React.FC<Props> = ({ paymentPlanFeature }) => {
   return (
-    <li>
+    <li className="items-center justify-start flex flex-row">
       <span className="mr-2 inline-block h-4 w-4">
         {paymentPlanFeature.avaible === true ? (
           <CheckIcon className="text-green-500" />
         ) : (
           paymentPlanFeature.avaible === false && (
-            <XIcon className="text-red-500" />
+            <XMarkIcon className="text-red-500" />
           )
         )}
       </span>

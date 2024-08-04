@@ -38,7 +38,7 @@ const SignupFormBody: React.FC = () => {
     data.set("password", password);
     data.set("username", username);
     try {
-      const newUser = await registerUser(data);
+      await registerUser(data);
 
       const res = await signIn("credentials", {
         emailOrUsername: email || username,
@@ -47,7 +47,7 @@ const SignupFormBody: React.FC = () => {
       });
 
       if (!res) throw new ResponseError("The server do not response", 500);
-      //All is good
+      // All is good
       if (!(!res.ok || res.error)) {
         router.push("/app/");
         return;
@@ -66,9 +66,9 @@ const SignupFormBody: React.FC = () => {
         e instanceof EmailAlredyInUseError ||
         e instanceof UsernameAlredyInUse ||
         e instanceof InvalidFieldsUserLogin
-      )
+      ) {
         setErrorRegisterUser(e.message);
-      else if (e instanceof PrismaError || e instanceof InternalServerError) {
+      } else if (e instanceof PrismaError || e instanceof InternalServerError) {
         if (!formikRef.current) return;
         if (!submitted) formikRef.current.submitForm();
       } else {
@@ -117,11 +117,11 @@ const SignupFormBody: React.FC = () => {
   });
   return (
     <>
-      <div className="w-full h-full flex flex-col bg-white rounded-lg shadow dark:border p-6 dark:bg-gray-800 dark:border-gray-700">
-        <h1 className="text-xl font-bold mb-5 leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+      <div className="w-full h-full flex flex-col bg-background-light dark:bg-background-dark rounded-lg shadow dark:border">
+        <h1 className="text-xl font-bold mb-5 leading-tight tracking-tight ">
           Create an account
         </h1>
-        <p className="text-sm text-black dark:text-white font-light mb-7">
+        <p className="text-sm  font-light mb-7">
           Start manage your Projects in seconds. Already have an account?{" "}
           <Link
             href="/login/"
@@ -146,7 +146,7 @@ const SignupFormBody: React.FC = () => {
                 <div className="mb-5" key={key}>
                   <label
                     htmlFor={field.value}
-                    className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-base font-medium "
                   >
                     {field.text}
                   </label>
@@ -155,8 +155,8 @@ const SignupFormBody: React.FC = () => {
                       field.value === "email"
                         ? "email"
                         : field.value === "password"
-                        ? "password"
-                        : "text"
+                          ? "password"
+                          : "text"
                     }
                     name={field.value}
                     id={field.value}
@@ -208,7 +208,7 @@ const SignupFormBody: React.FC = () => {
               >
                 Create an account
               </button>
-              <p className="text-sm text-black dark:text-white font-light w-full text-center">
+              <p className="text-sm  font-light w-full text-center">
                 Already have an account?{" "}
                 <Link
                   href="/login/"
@@ -220,9 +220,9 @@ const SignupFormBody: React.FC = () => {
             </Form>
           )}
         </Formik>
-        <HorizontalRuleForm bgColor="bg-white" bgColorDark="bg-gray-800" />
+        <HorizontalRuleForm />
 
-        <ExternalSignLinks handleSignIn={handleExternalSignIn} />
+        <ExternalSignLinks />
       </div>
 
       {loading && <LoaderModal loader={SpinnerLoader} text="Sign in" />}

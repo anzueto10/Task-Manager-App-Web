@@ -66,9 +66,7 @@ const FormModal: React.FC<Props> = ({
                 className="text-base w-full font-semibold leading-6 inline-flex"
               >
                 <section>
-                  <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
-                    {modalTitle}
-                  </h3>
+                  <h3 className="text-lg font-semibold mb-2">{modalTitle}</h3>
                   <p className="text-sm font-normal text-mutedForeground-light dark:text-mutedForeground-dark">
                     {modalDescription}
                   </p>

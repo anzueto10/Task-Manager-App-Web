@@ -11,7 +11,7 @@ const getProjectFormData = ({
   const title = data.get(PROJECT_FIELDS.TITLE) as string;
   const description = data.get(PROJECT_FIELDS.DESCRIPTION) as string;
 
-  //TODO hacer validaciones y lanzar errores
+  // TODO hacer validaciones y lanzar errores
 
   return {
     title,

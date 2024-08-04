@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/components/ui/button/Button";
 import CheckInput from "@/components/ui/fields/CheckInput";
 import Input from "@/components/ui/fields/Input";
 import SpinnerLoader from "@/components/ui/loaders/SpinnerLoader";
@@ -7,13 +6,13 @@ import LoaderModal from "@/components/ui/modal/LoaderModal";
 import InternalServerError from "@/errors/InternalServerError";
 import PrismaError from "@/errors/PrismaError";
 import ResponseError from "@/errors/ResponseError";
-import { LoginInitialValues, Providers } from "@/types";
+import { LoginInitialValues } from "@/types";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { boolean, object, string } from "yup";
+import { object, string } from "yup";
 
 const LoginUser = ({ formName }: { formName: string }) => {
   const router = useRouter();

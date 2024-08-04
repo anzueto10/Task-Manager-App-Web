@@ -6,13 +6,13 @@ const getUserFormData = (formData: FormData): FormUserFields => {
   const email = formData.get(USER_FIELDS.EMAIL) as string;
   const password = formData.get(USER_FIELDS.PASSWORD) as string;
 
-  if (username)
+  if (username) {
     return {
       username,
       email,
       password,
     };
-  else {
+  } else {
     return {
       email,
       password,

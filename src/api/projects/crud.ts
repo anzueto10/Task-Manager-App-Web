@@ -3,7 +3,7 @@ import { type FormProjectFields, type Project, type User } from "@/types";
 export const getProjects = async ({ userId }: { userId: User["id"] }) => {
   try {
     const res: Response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/project`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/project`,
     );
 
     if (!res.ok) {
@@ -31,7 +31,7 @@ export const createProject = async ({
       {
         method: "POST",
         body: projectData,
-      }
+      },
     );
 
     if (!res.ok) throw new Error("");
@@ -58,7 +58,7 @@ export const editProject = async ({
       {
         method: "PUT",
         body: projectData,
-      }
+      },
     );
 
     if (!res.ok) throw new Error("");
@@ -85,7 +85,7 @@ export const deleteProject = async ({
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!res.ok) throw new Error();

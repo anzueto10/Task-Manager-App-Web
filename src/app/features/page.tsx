@@ -49,13 +49,13 @@ const FeaturesPage = () => {
               ([key, value]) => ({
                 description: value.description,
                 title: value.title,
-              })
+              }),
             ),
             ...Object.entries(KEY_FEATURES.ICON_FEATURES).map(
               ([key, value]) => ({
                 description: value.description,
                 title: value.title,
-              })
+              }),
             ),
           ]}
         />

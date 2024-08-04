@@ -1,7 +1,6 @@
 "use client";
 import useToggleTheme from "@/hooks/useToggleTheme";
-import SoonIcon from "@/components/ui/icons/SoonIcon";
-import MoonIcon from "@/components/ui/icons/MoonIcon";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   onlyIcons?: boolean;
@@ -13,16 +12,16 @@ const ToggleTheme: React.FC<Props> = ({ onlyIcons }) => {
   return (
     <button
       onClick={toggleTheme}
-      className="text-primary-light dark:text-primary-dark w-full h-full inline-flex items-center justify-center"
+      className="text-primary-light dark:text-primary-dark inline-flex items-center justify-center"
     >
       {darkMode ? (
         <>
-          <SoonIcon />
+          <SunIcon className="size-6" />
           {!onlyIcons && <span className="ml-1">Light Mode</span>}
         </>
       ) : (
         <>
-          <MoonIcon />
+          <MoonIcon className="size-6" />
           {!onlyIcons && <span className="ml-1">Dark Mode</span>}
         </>
       )}

@@ -1,43 +1,25 @@
-"use client";
-
-const FacebookIcon = ({ h, w }: { h: string; w: string }) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlSpace="preserve"
-      width={w}
-      height={h}
-      version="1.1"
-      style={{
-        shapeRendering: "geometricPrecision",
-        textRendering: "geometricPrecision",
-        fillRule: "evenodd",
-        clipRule: "evenodd",
-      }}
-      viewBox="0 0 14222 14222"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-    >
-      <defs>
-        <style type="text/css">
-          {`
-            .fil0 {fill:#1977F3;fill-rule:nonzero}
-            .fil1 {fill:#FEFEFE;fill-rule:nonzero}
-          `}
-        </style>
-      </defs>
-      <g id="Layer_x0020_1">
-        <metadata id="CorelCorpID_0Corel-Layer" />
-        <path
-          className="fil0"
-          d="M14222 7111c0,-3927 -3184,-7111 -7111,-7111 -3927,0 -7111,3184 -7111,7111 0,3549 2600,6491 6000,7025l0 -4969 -1806 0 0 -2056 1806 0 0 -1567c0,-1782 1062,-2767 2686,-2767 778,0 1592,139 1592,139l0 1750 -897 0c-883,0 -1159,548 -1159,1111l0 1334 1972 0 -315 2056 -1657 0 0 4969c3400,-533 6000,-3475 6000,-7025z"
-        />
-        <path
-          className="fil1"
-          d="M9879 9167l315 -2056 -1972 0 0 -1334c0,-562 275,-1111 1159,-1111l897 0 0 -1750c0,0 -814,-139 -1592,-139 -1624,0 -2686,984 -2686,2767l0 1567 -1806 0 0 2056 1806 0 0 4969c362,57 733,86 1111,86 378,0 749,-30 1111,-86l0 -4969 1657 0z"
-        />
-      </g>
-    </svg>
-  );
-};
-
-export default FacebookIcon;
+import type { SVGProps } from "react";
+const Facebook = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 36 36"
+    fill="url(#a)"
+    className="size-6"
+    height="1em"
+    width="1em"
+    {...props}
+  >
+    <defs>
+      <linearGradient x1="50%" x2="50%" y1="97.078%" y2="0%" id="a">
+        <stop offset="0%" stopColor="#0062E0" />
+        <stop offset="100%" stopColor="#19AFFF" />
+      </linearGradient>
+    </defs>
+    <path d="M15 35.8C6.5 34.3 0 26.9 0 18 0 8.1 8.1 0 18 0s18 8.1 18 18c0 8.9-6.5 16.3-15 17.8l-1-.8h-4l-1 .8z" />
+    <path
+      fill="#FFF"
+      d="m25 23 .8-5H21v-3.5c0-1.4.5-2.5 2.7-2.5H26V7.4c-1.3-.2-2.7-.4-4-.4-4.1 0-7 2.5-7 7v4h-4.5v5H15v12.7c1 .2 2 .3 3 .3s2-.1 3-.3V23h4z"
+    />
+  </svg>
+);
+export default Facebook;

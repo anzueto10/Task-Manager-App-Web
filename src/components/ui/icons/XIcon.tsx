@@ -1,28 +1,25 @@
 "use client";
 
-import { IconProps } from "@/types";
+import type { SVGProps } from "react";
 
-const XIcon: React.FC<IconProps> = ({
-  width,
-  height,
-  className = "w-full h-full",
-  stroke = 2,
-}) => {
+const XIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={stroke}
+      strokeWidth={1.5}
       stroke="currentColor"
-      width={width}
-      height={height}
-      className={className}
+      {...props}
+      className="size-6"
+      height="1em"
+      width="1em"
     >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M6 18 18 6M6 6l12 12"
+        fill="currentColor"
       />
     </svg>
   );

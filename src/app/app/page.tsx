@@ -12,7 +12,7 @@ const TaskAppPage: React.FC = async () => {
   return (
     <>
       <div className="flex flex-row 2xl:max-h-screen min-h-screen 2xl:h-full">
-        <main className="flex flex-col dark:bg-background p-5 gap-10 text-white grow">
+        <main className="flex flex-col bg-background-light dark:bg-background-dark p-5 gap-10 grow">
           <NavbarApp />
           <TaskLayouts />
         </main>

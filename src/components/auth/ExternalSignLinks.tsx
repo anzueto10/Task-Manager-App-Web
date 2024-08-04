@@ -13,7 +13,7 @@ const ExternalSignLinks = () => {
           key={key}
           variable="outline"
         >
-          <link.Icon h="25" w="25" />
+          <link.Icon />
           <span className="ml-3">{link.text}</span>
         </Button>
       ))}

@@ -3,7 +3,7 @@ import { ADD_BUTTONS_TEXT } from "@/consts";
 import { useEffect, useState } from "react";
 import ProjectsContainer from "@/components/projects/containers/ProjectsContainer";
 import { Project } from "@/types";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { projectsState } from "@/store/atoms";
 import CreateProject from "@/components/projects/forms/CreateProject";
 import {
@@ -59,7 +59,7 @@ const AppDrawer: React.FC<Props> = ({ initialProjects }) => {
                 <aside className="flex h-full flex-col overflow-y-auto bg-background-light border-r dark:bg-background-dark py-6 shadow-xl">
                   <DialogTitle
                     as="header"
-                    className="text-base inline-flex font-semibold items-center leading-6 text-gray-900 px-4 sm:px-6"
+                    className="text-base inline-flex font-semibold items-center leading-6 px-4 sm:px-6"
                   >
                     <Squares />
                     <h5

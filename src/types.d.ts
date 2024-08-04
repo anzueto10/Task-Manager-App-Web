@@ -214,13 +214,6 @@ export interface PaymentPlan {
   features: Array<PaymentPlanFeature>;
 }
 
-export interface IconProps {
-  width?: number;
-  height?: number;
-  stroke?: number;
-  className?: string;
-}
-
 export interface IconKeyFeature extends KeyFeature {
   Icon: React.FC<IconProps>;
 }

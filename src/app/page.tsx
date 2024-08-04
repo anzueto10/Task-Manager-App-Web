@@ -69,7 +69,7 @@ const HomePage = () => {
               ([key, value]) => ({
                 description: value.description,
                 title: value.title,
-              })
+              }),
             )}
           />
         </article>

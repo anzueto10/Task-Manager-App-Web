@@ -31,7 +31,7 @@ export const GET = async (req: NextRequest, { params }: Params) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }
@@ -58,15 +58,16 @@ export const PUT = async (req: NextRequest, { params }: Params) => {
 
     return NextResponse.json(editedProject);
   } catch (e) {
-    if (e instanceof Error)
+    if (e instanceof Error) {
       return NextResponse.json(
         {
           error: e.message,
         },
         {
           status: 500,
-        }
+        },
       );
+    }
   }
 };
 
@@ -94,14 +95,14 @@ export const DELETE = async (req: NextRequest, { params }: Params) => {
         },
         {
           status: 500,
-        }
+        },
       );
     } else {
       return NextResponse.json(
         {
           error: e,
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }

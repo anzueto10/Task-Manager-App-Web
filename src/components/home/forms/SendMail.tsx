@@ -19,9 +19,9 @@ const SendMail = () => {
 
   const handdleSubmit = (
     values: { email: string },
-    { resetForm }: FormikHelpers<{ email: string }>
+    { resetForm }: FormikHelpers<{ email: string }>,
   ) => {
-    //TODO Enviar a la api de enviar un correo
+    // TODO Enviar a la api de enviar un correo
     console.log(values);
     resetForm();
     setSend(true);

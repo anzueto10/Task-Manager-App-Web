@@ -13,6 +13,7 @@ import CombineIcon from "./components/ui/icons/CombineIcon";
 import UserCircleIcon from "./components/ui/icons/UserCircleIcon";
 import AIIcon from "./components/ui/icons/AIIcon";
 
+const hola = "";
 export const USER_FIELDS = {
   USERNAME: "username",
   EMAIL: "email",
@@ -458,7 +459,7 @@ export const PRIVACY_SECTIONS: { [key: string]: Privacy } = {
   },
 } as const;
 
-//Clases
+// Clases
 
 export const TEXT_AREA_CLASSES =
   "flex resize-none w-full rounded-md border border-input bg-background-light border-input-light ring-offset-background-light placeholder:text-mutedForeground-light focus-visible:ring-ring-light dark:bg-background-dark dark:border-input-dark dark:ring-offset-background-dark dark:placeholder:text-mutedForeground-dark dark:focus-visible:ring-ring-dark px-3 py-2 text-sm  file:border-0 file:bg-transparent file:text-sm file:font-medium  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 col-span-3 p-2.5";

@@ -16,7 +16,7 @@ const getTaskFormData = ({
   const projectId = new Number(data.get(TASK_FIELDS.PROJECT)) as number;
   const image = data.get(TASK_FIELDS.IMAGE) as File;
 
-  //TODO hacer validaciones y lanzar errores
+  // TODO hacer validaciones y lanzar errores
 
   return {
     title,

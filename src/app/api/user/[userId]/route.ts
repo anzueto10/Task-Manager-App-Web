@@ -42,7 +42,7 @@ export const GET = async (req: Request, { params }: GetParams) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }
@@ -66,15 +66,16 @@ export const PUT = async (req: Request, { params }: PutParams) => {
 
     return NextResponse.json(newUser);
   } catch (e) {
-    if (e instanceof Error)
+    if (e instanceof Error) {
       return NextResponse.json(
         {
           error: e.message,
         },
         {
           status: 500,
-        }
+        },
       );
+    }
   }
 };
 
@@ -90,14 +91,15 @@ export const DELETE = async (request: Request, { params }: DeleteParams) => {
 
     return NextResponse.json(deletedUser);
   } catch (e) {
-    if (e instanceof Error)
+    if (e instanceof Error) {
       return NextResponse.json(
         {
           error: e.message,
         },
         {
           status: 500,
-        }
+        },
       );
+    }
   }
 };

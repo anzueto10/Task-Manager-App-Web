@@ -1,6 +1,8 @@
 "use client";
 
-const SettingsIcon = () => {
+import type { SVGProps } from "react";
+
+const SettingsIcon = (props: SVGProps<SVGSVGElement>) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +11,9 @@ const SettingsIcon = () => {
       strokeWidth={1.5}
       stroke="currentColor"
       className="size-6"
+      height="1em"
+      width="1em"
+      {...props}
     >
       <path
         strokeLinecap="round"

@@ -1,3 +1,23 @@
 {
-  "extends": "next/core-web-vitals"
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "semistandard",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "no-unused-vars": "error",
+    "no-console": "warn",
+    "@typescript-eslint/no-unused-vars": "error",
+    "quotes": ["error", "double"],
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": false,
+        "semi": true
+      }
+    ]
+  }
 }

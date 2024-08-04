@@ -23,9 +23,9 @@ const SendContact = () => {
     values: SendContactInitialValues,
     {
       resetForm,
-    }: FormikHelpers<{ email: string; name: string; message: string }>
+    }: FormikHelpers<{ email: string; name: string; message: string }>,
   ) => {
-    //TODO Enviar a la api de enviar un correo
+    // TODO Enviar a la api de enviar un correo
     console.log(values);
     resetForm();
     setSend(true);

@@ -13,7 +13,7 @@ const registerUser = async (userData: FormData) => {
       {
         method: "POST",
         body: userData,
-      }
+      },
     );
 
     if (res.ok) {

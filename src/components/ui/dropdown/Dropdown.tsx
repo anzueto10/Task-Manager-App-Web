@@ -1,15 +1,15 @@
 "use client";
-import { forwardRef } from "react";
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import Link from "next/link";
-import ToggleTheme from "@/components/ui/toggle-theme/ToggleTheme";
 import Button from "@/components/ui/button/Button";
+import ToggleTheme from "@/components/ui/toggle-theme/ToggleTheme";
 import {
   DropdownOption,
   RoundedTypesButton,
   VariableTypesButton,
 } from "@/types";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
+import { forwardRef } from "react";
 
 interface Props {
   options: Record<string, DropdownOption>;
@@ -35,9 +35,7 @@ const Dropdown: React.FC<Props> = ({
       <MenuButton as={Button} variable={variableButton} rounded={roundedButton}>
         {text && <span>{text}</span>}
         {Icon && <Icon />}
-        {haveChevronDown && (
-          <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" />
-        )}
+        {haveChevronDown && <ChevronDownIcon className="-mr-1 h-5 w-5" />}
       </MenuButton>
 
       <MenuItems
@@ -76,7 +74,6 @@ const Dropdown: React.FC<Props> = ({
 
 const ToggleThemeComponent: React.ForwardRefRenderFunction<any, {}> = (
   props,
-  ref
 ) => {
   return <ToggleTheme {...props} />;
 };

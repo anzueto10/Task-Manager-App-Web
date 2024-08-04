@@ -35,8 +35,8 @@ const FileInput: React.FC<Props> = ({
         bgImage
           ? { backgroundImage: `url('${bgImage}'` }
           : initialImage
-          ? { backgroundImage: `url('${initialImage}')` }
-          : {}
+            ? { backgroundImage: `url('${initialImage}')` }
+            : {}
       }
     >
       <div className="w-full flex flex-col justify-center items-center text-lg">
@@ -46,7 +46,7 @@ const FileInput: React.FC<Props> = ({
         </h2>
       </div>
       <div className="grid gap-2">
-        <h4 className="text-center text-gray-900 text-sm font-medium leading-snug">
+        <h4 className="text-center text-sm font-medium leading-snug">
           Chose your image here
         </h4>
         <div className="flex items-center justify-center">

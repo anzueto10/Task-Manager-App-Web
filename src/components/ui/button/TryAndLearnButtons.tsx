@@ -13,10 +13,10 @@ const TryAndLearnButtons: React.FC<Props> = ({ position = "left" }) => {
         position === "left"
           ? "mr-auto"
           : position === "right"
-          ? "ml-auto"
-          : position === "bottom"
-          ? "mt-auto"
-          : position === "top" && "mb-auto"
+            ? "ml-auto"
+            : position === "bottom"
+              ? "mt-auto"
+              : position === "top" && "mb-auto"
       }`}
     >
       <Link href="/app/">

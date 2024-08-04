@@ -33,7 +33,7 @@ const CreateProject: React.FC<
   const validationSchema = object({
     title: string().required("Please, enter a title for the project."),
     description: string().required(
-      "Please, enter a description for the project."
+      "Please, enter a description for the project.",
     ),
   });
 
@@ -92,7 +92,7 @@ const CreateProject: React.FC<
               <div className="grid grid-cols-4 items-center gap-4">
                 <label
                   htmlFor="description"
-                  className="block mb-2 text-base font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-base font-medium"
                 >
                   {PROJECT_FIELDS_TEXT.DESCRIPTION}
                 </label>

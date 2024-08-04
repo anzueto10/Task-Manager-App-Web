@@ -31,7 +31,7 @@ export const GET = async (req: NextRequest, { params }: TaskIdParams) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }
@@ -55,8 +55,9 @@ export const PUT = async (req: NextRequest, { params }: TaskIdParams) => {
       const imageBuffer = Buffer.from(bytes);
 
       const publicIdMatch = imageUrl.match(/\/([^/]+)\.(jpg|jpeg|png|gif)$/i);
-      if (!publicIdMatch || !publicIdMatch[1])
+      if (!publicIdMatch || !publicIdMatch[1]) {
         throw new Error("Failed to extract public_id from image URL");
+      }
 
       const publicId = publicIdMatch[1];
 
@@ -73,7 +74,7 @@ export const PUT = async (req: NextRequest, { params }: TaskIdParams) => {
 
       await cloudinary.api.delete_resources(
         [`${uploadOptions.folder}/${publicId}`],
-        { type: "upload", resource_type: "image" }
+        { type: "upload", resource_type: "image" },
       );
 
       imageResponse = await new Promise((resolve, reject) => {
@@ -113,7 +114,7 @@ export const PUT = async (req: NextRequest, { params }: TaskIdParams) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }
@@ -135,8 +136,9 @@ export const DELETE = async (req: NextRequest, { params }: TaskIdParams) => {
     const taskImageUrl = deletedTask.image;
     if (taskImageUrl) {
       const publicIdMatch = taskImageUrl.match(/\/([^/]+)\.jpg$/);
-      if (!publicIdMatch || !publicIdMatch[1])
+      if (!publicIdMatch || !publicIdMatch[1]) {
         throw new Error("Failed to extract public_id from image URL");
+      }
 
       const publicId = publicIdMatch[1];
 
@@ -158,7 +160,7 @@ export const DELETE = async (req: NextRequest, { params }: TaskIdParams) => {
         },
         {
           status: 500,
-        }
+        },
       );
     }
   }

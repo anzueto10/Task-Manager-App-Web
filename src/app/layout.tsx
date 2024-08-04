@@ -25,7 +25,7 @@ const RootLayout = async ({
           "antialiased",
           fontHeading.variable,
           fontBody.variable,
-          "flex flex-col min-h-dvh"
+          "flex flex-col min-h-dvh",
         )}
       >
         <Providers session={session}>{children}</Providers>

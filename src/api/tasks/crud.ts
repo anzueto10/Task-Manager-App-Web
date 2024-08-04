@@ -4,7 +4,7 @@ import type { Task, User } from "@/types";
 export const getTasks = async ({ userId }: { userId: User["id"] }) => {
   try {
     const res: Response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/task/`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}/task/`,
     );
     if (!res.ok) throw new ResponseError("Response error", 400);
 
@@ -26,7 +26,7 @@ export const createTask = async ({
       {
         method: "POST",
         body: taskData,
-      }
+      },
     );
 
     if (!res.ok) throw new Error();
@@ -53,7 +53,7 @@ export const deleteTask = async ({
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!res.ok) throw new Error("");
@@ -80,7 +80,7 @@ export const editTask = async ({
       {
         method: "PUT",
         body: taskData,
-      }
+      },
     );
 
     if (!res.ok) throw new Error("");

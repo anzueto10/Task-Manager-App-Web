@@ -25,15 +25,16 @@ export const GET = async (req: NextRequest, { params }: Params) => {
 
     return NextResponse.json(tasks);
   } catch (e) {
-    if (e instanceof Error)
+    if (e instanceof Error) {
       return NextResponse.json(
         {
           error: e.message,
         },
         {
           status: 500,
-        }
+        },
       );
+    }
   }
 };
 
@@ -105,7 +106,7 @@ export const POST = async (req: NextRequest, { params }: Params) => {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 };
